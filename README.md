@@ -1,2 +1,2 @@
 # FiBo2SysMLv2
-FiBo to SysMLv2: Data Architecture
+this repository is an experimental attempt to model part of the FiBo ontology into a SysMLv2 data architecture.
