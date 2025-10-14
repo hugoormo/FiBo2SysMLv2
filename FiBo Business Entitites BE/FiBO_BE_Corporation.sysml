@@ -1,6 +1,7 @@
 package FIBO_BE_Corporations {
 
     private import ScalarValues::*;
+    private import FIBO_FND_Constraints::*;
 
     part def Organization;
 
@@ -11,9 +12,10 @@ package FIBO_BE_Corporations {
         attribute sharesAuthorized : Integer[0..1];
         attribute registeredIn : Jurisdiction[0..*];
 
-        constraint sharesAuthorized_non_negative : NonNegative {
+        constraint sharesAuthorized_non_negative : FIBO_FND_Constraints::NonNegativeInteger {
             in n = sharesAuthorized;
         }
+
     }
 
     part def StockCorporation specializes Corporation;
@@ -45,10 +47,10 @@ package FIBO_BE_Corporations {
         attribute authorized : Integer[0..1];
         attribute issued : Integer[0..1];
 
-        constraint authorized_non_negative : NonNegative {
+        constraint authorized_non_negative : FIBO_FND_Constraints::NonNegativeInteger {
             in n = authorized;
         }
-        constraint issued_non_negative : NonNegative {
+        constraint issued_non_negative : FIBO_FND_Constraints::NonNegativeInteger {
             in n = issued;
         }
     }
@@ -66,10 +68,5 @@ package FIBO_BE_Corporations {
     connection def corporation_has_share_classes {
         end [0..*] ordered part corporation : Corporation;
         end [0..1] item shareClass : ShareClass;
-    }
-
-    constraint def NonNegative {
-        in n : Integer;
-        n >= 0
     }
 }

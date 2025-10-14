@@ -14,8 +14,8 @@ package FIBO_BE_FunctionalEntities {
 
     part def Business specializes FunctionalEntity;
 
+    // Non-profit policy (from earlier CI version remains intact)
     part def NonProfit specializes FunctionalEntity {
-        // Policy flag + enforced constraint (must not distribute profits)
         attribute allowsProfitDistribution : Boolean[1];
 
         constraint must_not_distribute_profits : MustNotDistributeProfits {
@@ -23,7 +23,11 @@ package FIBO_BE_FunctionalEntities {
         }
     }
 
+    // Publisher: functional entity that publishes information
     part def Publisher specializes FunctionalEntity;
+
+    // MarketDataProvider: subclass of Publisher (per Publishers.rdf)
+    part def MarketDataProvider specializes Publisher;
 
     // Optional functional actor common in BE contexts
     part def Regulator specializes FunctionalEntity;
@@ -31,15 +35,16 @@ package FIBO_BE_FunctionalEntities {
     // =========================
     // Stored / flow content (items)
     // =========================
-    // Uses ExplicitDate and Jurisdiction from FIBO_BE_Corporations
+    // Publication artifact (domain/range of publishes/hasPublisher)
     item def Publication {
         attribute title : String[1];
         attribute publishedOn : ExplicitDate[0..1];
     }
 
     // =========================
-    // Connections (with cross features)
+    // Connections (Publishers.rdf semantics)
     // =========================
+    // publishes: Publisher → Publication (inverse of hasPublisher)
     // A Publisher may publish zero or more Publications (ordered for chronology/display);
     // a Publication has at most one Publisher.
     connection def publishes {
@@ -47,10 +52,25 @@ package FIBO_BE_FunctionalEntities {
         end [0..1] item publication : Publication;
     }
 
-    // A FunctionalEntity may operate in one or more Jurisdictions; a Jurisdiction may host many entities.
-    connection def operatesInJurisdiction {
-        end [1..*] part entity : FunctionalEntity;
-        end [0..*] item jurisdiction : Jurisdiction;
+    // hasPublisher: Publication → Publisher (inverse of publishes)
+    connection def hasPublisher {
+        end [1] item publication : Publication;
+        end [0..1] part publisher : Publisher;
+    }
+
+    // isPublishedBy: Publication → Party (mapped to Organization here)
+    // The ontology ranges this to 'party'; we use Organization until a Party CI is available.
+    connection def isPublishedBy {
+        end [1] item publication : Publication;
+        end [0..1] part party : Organization;
+    }
+
+    // Publisher is a party role played by exactly one party:
+    // for each Publisher there must be exactly one Organization playing it;
+    // each Organization may play zero or more Publisher roles.
+    connection def publisherPlayedBy {
+        end [0..*] part publisher : Publisher;   // per Organization, 0..* publisher roles
+        end [1] part party : Organization;      // per Publisher, exactly 1 party
     }
 
     // =========================
@@ -61,3 +81,4 @@ package FIBO_BE_FunctionalEntities {
         not allowsProfitDistribution
     }
 }
+
