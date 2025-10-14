@@ -1,3 +1,9 @@
+// =========================================================
+// Configuration Item: FIBO_SEC_Debt
+// SysML v2 model mapping of FIBO SEC/Debt RDF group
+// Baseline imports follow project conventions
+// =========================================================
+
 package FIBO_SEC_Debt {
 
     private import ScalarValues::*;

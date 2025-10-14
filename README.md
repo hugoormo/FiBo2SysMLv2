@@ -92,5 +92,10 @@ Attribution to original RDF sources and contributors is maintained in the Metada
 * Automated syntax validation for SysML v2 compliance
 * Model import testing to ensure dependency integrity
 
+## Notes for Contributors
+
+This configuration plan forms part of the FiBo2SysMLv2 experimental model-based architecture initiative.
+All contributions should align with this configuration management process to ensure consistency and interoperability across the repository.
+
 _Last updated: October 2025
 Repository Maintainer: [Hugo Ormo]_  

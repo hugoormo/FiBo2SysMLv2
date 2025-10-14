@@ -1,5 +1,7 @@
 // =========================================================
-// Parent package — FIBO_SEC_Funds
+// Configuration Item: FIBO_SEC_Funds
+// SysML v2 model mapping of FIBO SEC/Funds RDF group
+// Baseline imports follow project conventions
 // =========================================================
 package FIBO_SEC_Funds {
 
