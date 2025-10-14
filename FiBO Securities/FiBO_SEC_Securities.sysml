@@ -62,7 +62,8 @@ package FIBO_SEC_Securities {
             enum OTHER;
         }
 
-        item def SecurityClassification {$1ref classifiedSecurity: Security[1];
+        item def SecurityClassification {
+            ref classifiedSecurity: Security[1];
             ref class: SecurityClass[1];
         }
 
@@ -138,13 +139,18 @@ package FIBO_SEC_Securities {
         item def WeightedConstituent {
             attribute weight: Real;
             ref member: WeightedConstituent[1];
-
-            constraint def Between0And1Weight { assert weight >= 0.0 and weight <= 1.0; }
+            constraint def Between0And1Weight { 
+                attribute weight : Real = weight;
+                
+                weight >= 0.0 and weight <= 1.0 
+            }
         }
 
         item def WeightsSumToOne {
             attribute totalWeight: Real;
-            constraint def SumToOne { assert totalWeight == 1.0; }
+            constraint def SumToOne { 
+                attribute totalWeight : Real = totalWeight;
+                totalWeight == 1.0 }
         }
     }
 
@@ -229,8 +235,14 @@ package FIBO_SEC_Securities {
     package SecuritiesIdentificationIndividuals {
         private import Core::*;
         private import SecuritiesIdentification::*;
-        item def Example_ISIN_MSFT specializes ISINIdentifier { value := "US5949181045"; scheme := IdentifierScheme::ISIN; }
-        item def Example_Ticker_MSFT specializes TickerIdentifier { value := "MSFT"; scheme := IdentifierScheme::TICKER; }
+        item def Example_ISIN_MSFT specializes ISINIdentifier { 
+            :>> value := "US5949181045"; 
+            :>> scheme := IdentifierScheme::ISIN; 
+        }
+        item def Example_Ticker_MSFT specializes TickerIdentifier { 
+            :>> value := "MSFT"; 
+            :>> scheme := IdentifierScheme::TICKER; 
+        }
     }
 
     package SecuritiesIssuance {
@@ -260,9 +272,14 @@ package FIBO_SEC_Securities {
 
     package SecuritiesRestrictions {
         private import Core::*;
-        item def HoldingRestriction specializes SecurityRestriction { attribute maxPositionPercent: Real[0..1]; }
+        item def HoldingRestriction specializes SecurityRestriction { 
+            attribute maxPositionPercent: Real[0..1]; 
+        }
         item def UseRestriction specializes SecurityRestriction {}
-        constraint def MaxPositionBetween0And1 { assert maxPositionPercent >= 0.0 and maxPositionPercent <= 1.0; }
+        constraint def MaxPositionBetween0And1 { 
+            attribute maxPositionPercent : Real = maxPositionPercent;
+            maxPositionPercent >= 0.0 and maxPositionPercent <= 1.0
+        }
     }
 
     package SecurityAssets {
