@@ -13,12 +13,11 @@ package FIBO_SEC_All {
     // As we approve SEC configuration items, add them as private imports below.
 
     private import ScalarValues::*;
-
-    // Examples to add later (uncomment as CIs are approved):
-    // private import FIBO_SEC_Securities::*;
-    // private import FIBO_SEC_FinancialInstruments::*;
-    // private import FIBO_SEC_Equities::*;
-    // private import FIBO_SEC_Debt::*;
+    private import FIBO_SEC_Securities::*;
+    private import FIBO_SEC_Funds::*;
+    private import FIBO_SEC_Equities::*;
+    private import FIBO_SEC_Debt::*;
     // private import FIBO_SEC_Identifiers::*;
     // private import FIBO_SEC_Metadata::*;
+    
 }
