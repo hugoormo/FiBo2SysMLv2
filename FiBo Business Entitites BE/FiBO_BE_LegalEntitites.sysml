@@ -5,6 +5,7 @@ package FIBO_BE_LegalEntities {
     private import FIBO_BE_FunctionalEntities::*;
     private import FIBO_BE_GovernmentEntities::*;
     private import FIBO_BE_Metadata::*;
+    private import FIBO_FND_Organizations::*;
 
     // =========================
     // Legal Persons (from LegalPersons.rdf)

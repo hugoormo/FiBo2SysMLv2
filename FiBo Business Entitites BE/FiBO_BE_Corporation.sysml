@@ -2,8 +2,7 @@ package FIBO_BE_Corporations {
 
     private import ScalarValues::*;
     private import FIBO_FND_Constraints::*;
-
-    part def Organization;
+    private import FIBO_FND_Organizations::*;
 
     part def Corporation specializes Organization {
         attribute dateOfIncorporation : ExplicitDate[0..1];

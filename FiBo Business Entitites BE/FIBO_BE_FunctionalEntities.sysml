@@ -2,6 +2,7 @@ package FIBO_BE_FunctionalEntities {
 
     private import ScalarValues::*;
     private import FIBO_BE_Corporations::*;
+    private import FIBO_FND_Organizations::*;
 
     // =========================
     // Structural backbone (parts)

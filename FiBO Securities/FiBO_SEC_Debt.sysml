@@ -13,6 +13,7 @@ package FIBO_SEC_Debt {
     private import FIBO_BE_LegalEntities::*;
     private import FIBO_BE_Metadata::*;
     private import FIBO_FND_Constraints::*;
+    private import FIBO_FND_Organizations::*;
 
     // =========================
     // Shared core for SEC/Debt

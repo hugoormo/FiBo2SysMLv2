@@ -4,6 +4,7 @@ package FIBO_BE_Metadata {
     private import FIBO_BE_Corporations::*;
     private import FIBO_BE_FunctionalEntities::*;
     private import FIBO_BE_All::*;
+    private import FIBO_FND_Organizations::*;
 
     // =========================
     // Stored / flow content (items)

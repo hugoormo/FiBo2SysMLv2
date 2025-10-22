@@ -90,6 +90,7 @@ package FIBO_SEC_Funds {
 
         // Import base CIV concepts from sibling subpackage
         private import CollectiveInvestmentVehicles::*;
+        private import FIBO_FND_Constraints::*;
 
         // Fund style and dealing
         enum def FundLiquidityProfile {
