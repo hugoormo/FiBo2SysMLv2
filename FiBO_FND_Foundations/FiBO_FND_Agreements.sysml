@@ -15,9 +15,9 @@ package Agreements {
   // ---- Imports (private) ----
   private import ScalarValues::*;   // String, Boolean
   private import Time::*;           // Date
+  private import Parties::*;     // Party
 
   // ---- Minimal stubs for external references (swap to real FND packages later) ----
-  item def Party { }
   item def Thing { }                // owl:Thing (generic subject)
 
   // ===== Classes =====

@@ -19,6 +19,7 @@ package CurrencyAmount {
   // ---- Imports (private) ----
   private import ScalarValues::*;                    // String, Integer, Real, Boolean
   private import Time::*;                            // safe even if no dates here
+  private import Locations::*;
 
   // ---- Minimal stubs for external refs (swap to real FND/Common packages later) ----
   item def ScalarQuantityValue { }                   // cmns-qtu:ScalarQuantityValue
@@ -27,7 +28,6 @@ package CurrencyAmount {
   item def Ratio { }                                 // cmns-qtu:Ratio
   item def Expression { }                            // cmns-qtu:Expression
   item def StructuredCollection { }                  // cmns-col:StructuredCollection
-  item def GeopoliticalEntity { }                    // cmns-loc:GeopoliticalEntity
   item def Identifier { }                            // cmns-id:Identifier
   item def CodeElement { }                           // cmns-cds:CodeElement
   item def Thing { }                                 // owl:Thing

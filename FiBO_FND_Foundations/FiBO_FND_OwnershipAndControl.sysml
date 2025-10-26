@@ -18,11 +18,13 @@ package Ownership {
   // ---- Imports (private) ----
   private import ScalarValues::*;      // String, Boolean, Integer, Real
   private import Time::*;              // Date
-  public import FIBO_FND_Organizations::*;     // Organization, FormalOrganization (if CI loaded)
+  private import Organizations::*;     // Organization, FormalOrganization (if CI loaded)
+  private import FormalOrganizations::*; // FormalOrganization (if CI loaded)
+  private import Parties::*;         // Party (if CI loaded)
+  private import People::*;          // Person (if CI loaded)
+
 
   // ---- Minimal stubs (safe until wired fully) ----
-  item def Party { }                   // FND Parties & Roles (to be wired)
-  item def Person { }
   item def Asset { }
   item def TangibleAsset specializes Asset { }
   item def IntangibleAsset specializes Asset { }
@@ -125,10 +127,9 @@ package Control {
   private import Organizations::*;       // FormalOrganization (if CI loaded)
   private import Jurisdiction::*;        // Jurisdiction (from Law CI)
   private import LegalCore::*;           // Law (from Law CI)
-  public import FIBO_FND_Organizations::*;     // Organization, FormalOrganization (if CI loaded)
-
-  // ---- Minimal stubs (safe until wired fully) ----
-  item def Party { }
+  private import Organizations::*;     // Organization, FormalOrganization (if CI loaded)
+  private import FormalOrganizations::*; // FormalOrganization (if CI loaded)
+  private import Parties::*;         // Party (if CI loaded)
 
   // ===== Enums =====
 

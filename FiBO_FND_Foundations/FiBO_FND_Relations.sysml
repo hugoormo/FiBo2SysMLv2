@@ -1,0 +1,1 @@
+//Relations are mainly defined in KerML and in SysML. Other relations may be used to define dependencies.

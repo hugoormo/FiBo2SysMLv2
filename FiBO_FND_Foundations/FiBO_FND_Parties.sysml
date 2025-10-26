@@ -1,7 +1,6 @@
 // ===================================================================
 // FIBO_FND_Parties.sysml
 // CI Aggregator (public re-export)
-// Paste this whole file as-is.
 // ===================================================================
 package FIBO_FND_Parties {
   public import Parties::*;
@@ -9,7 +8,7 @@ package FIBO_FND_Parties {
 
 // ======================
 // Parties.sysml
-// (feature-based from Parties.rdf)
+// (updated: Party and specializations are parts)
 // ======================
 package Parties {
 
@@ -26,10 +25,10 @@ package Parties {
   item def Thing { }                  // owl:Thing
 
   // =========================================================
-  // Core concepts
+  // Core concepts (as parts)
   // =========================================================
 
-  item def Party {
+  part def Party {
     doc/* actor (person, organization, or other legal/contractual participant) that can enter into relationships, assume obligations, and exercise rights */
     attribute partyName: PartyName[0..*];
     attribute partyIdentifier: PartyIdentifier[0..*];
@@ -37,21 +36,21 @@ package Parties {
     attribute domicile: Place[0..1];
     attribute principalAddress: Address[0..1];
     attribute contactPoint: ContactPoint[0..*];
-    attribute partyRole: PartyRole[0..*];          // roles this party plays
-    attribute relationship: PartyRelationship[0..*]; // relationships involving this party
+    attribute partyRole: PartyRole[0..*];              // roles this party plays
+    attribute relationship: PartyRelationship[0..*];   // relationships involving this party
   }
 
-  item def IndependentParty specializes Party {
+  part def IndependentParty specializes Party {
     doc/* party that acts on its own behalf and is not dependent on another party for authority */
   }
 
-  item def DependentParty specializes Party {
+  part def DependentParty specializes Party {
     doc/* party whose decisions or actions are subject to the will or authority of another party */
     attribute dependsOn: Party[0..*];
   }
 
   // =========================================================
-  // Names and identifiers (contextual)
+  // Names and identifiers (contextual, value-like)
   // =========================================================
 
   item def PartyName specializes ContextualName {
@@ -65,7 +64,7 @@ package Parties {
   }
 
   // =========================================================
-  // Roles and assignments
+  // Roles and assignments (remain items)
   // =========================================================
 
   item def PartyRole {
@@ -85,7 +84,7 @@ package Parties {
   }
 
   // =========================================================
-  // Party-to-party relationships
+  // Party-to-party relationships (remain items)
   // =========================================================
 
   enum def PartyRelationshipKind {

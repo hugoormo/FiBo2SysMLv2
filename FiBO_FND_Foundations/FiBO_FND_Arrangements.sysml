@@ -143,6 +143,9 @@ package Documents {
   item def Record { }                 // Commons Documents
   item def ExplicitDatePeriod { }
 
+  item def Collection;
+  item def Text;
+  
   item def FinancialRecord specializes Collection {
     doc/* record of financial information */
   }

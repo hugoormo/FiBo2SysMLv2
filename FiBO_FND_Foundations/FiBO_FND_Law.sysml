@@ -158,13 +158,7 @@ package LegalCore {
   private import ScalarValues::*;   // String, Boolean
   private import Time::*;           // Date, DateTime
   private import Jurisdiction::*;   // Court, Jurisdiction
-
-  // --- Minimal stubs (wire later if needed) ---
-  item def Document { }
-  item def Text { }
-  item def Organization { }
-  item def Party { }
-  item def Person { }
+  private import Documents::*;    // Document, Text
 
   // --- Enums ---
 

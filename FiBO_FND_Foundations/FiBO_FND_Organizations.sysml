@@ -9,7 +9,7 @@ package FIBO_FND_Organizations {
 
 // ======================
 // Organizations.sysml
-// (feature-based from Organizations.rdf)
+// (updated: core types are parts)
 // ======================
 package Organizations {
 
@@ -24,10 +24,10 @@ package Organizations {
   item def Place { }                  // FND Places/Locations
 
   // =========================================================
-  // Core organization concepts
+  // Core organization concepts (as parts)
   // =========================================================
 
-  item def Organization {
+  part def Organization {
     doc/* group of people and assets with a particular purpose and an internal governance structure */
     attribute organizationName: OrganizationName[0..*];
     attribute organizationIdentifier: OrganizationIdentifier[0..*];
@@ -42,12 +42,12 @@ package Organizations {
     attribute organizationalUnit: OrganizationalUnit[0..*];
   }
 
-  item def OrganizationalUnit specializes Organization {
+  part def OrganizationalUnit specializes Organization {
     doc/* division or sub-unit within an organization that performs a specific function or set of functions */
     attribute partOf: Organization[0..1];
   }
 
-  // Names and identifiers (contextual)
+  // Names and identifiers (contextual, value-like)
   item def OrganizationName specializes ContextualName {
     doc/* contextual designation by which an organization is known */
   }
@@ -61,7 +61,7 @@ package Organizations {
 
 // ======================
 // FormalOrganizations.sysml
-// (feature-based from FormalOrganizations.rdf)
+// (updated: all specializations are parts)
 // ======================
 package FormalOrganizations {
 
@@ -80,10 +80,10 @@ package FormalOrganizations {
   }
 
   // =========================================================
-  // Core legal/org status
+  // Core legal/org status (as parts)
   // =========================================================
 
-  item def FormalOrganization specializes Organizations::Organization {
+  part def FormalOrganization specializes Organizations::Organization {
     doc/* organization that is recognized in some legal jurisdiction with rights and obligations under the law */
     attribute legalName: Organizations::OrganizationName[0..*];
     attribute tradingName: Organizations::OrganizationName[0..*];
@@ -97,51 +97,51 @@ package FormalOrganizations {
     attribute inJurisdiction: Jurisdiction[0..1];
   }
 
-  item def RegisteredOrganization specializes FormalOrganization {
+  part def RegisteredOrganization specializes FormalOrganization {
     doc/* organization that has been recorded in an official register maintained by a competent authority */
   }
 
-  item def IncorporatedCompany specializes RegisteredOrganization {
+  part def IncorporatedCompany specializes RegisteredOrganization {
     doc/* registered organization formed as a separate legal entity under company law */
   }
 
-  item def Corporation specializes IncorporatedCompany {
+  part def Corporation specializes IncorporatedCompany {
     doc/* incorporated company treated as a single legal entity distinct from its owners */
   }
 
-  item def LimitedLiabilityCompany specializes IncorporatedCompany {
+  part def LimitedLiabilityCompany specializes IncorporatedCompany {
     doc/* incorporated company in which the liability of members or subscribers is limited to what they have invested or guaranteed to the company */
   }
 
-  item def Partnership specializes FormalOrganization {
+  part def Partnership specializes FormalOrganization {
     doc/* formal organization formed by two or more persons to carry on a business as co-owners */
     attribute hasGeneralPartner: Organizations::OrganizationIdentifier[0..*];  // placeholder until Parties/Roles are wired
     attribute hasLimitedPartner: Organizations::OrganizationIdentifier[0..*];  // placeholder
   }
 
-  item def GeneralPartnership specializes Partnership {
+  part def GeneralPartnership specializes Partnership {
     doc/* partnership in which partners share equally in both responsibility and liability */
   }
 
-  item def LimitedPartnership specializes Partnership {
+  part def LimitedPartnership specializes Partnership {
     doc/* partnership with at least one general partner and one or more limited partners whose liability is limited */
   }
 
-  item def NonProfitOrganization specializes FormalOrganization {
+  part def NonProfitOrganization specializes FormalOrganization {
     doc/* organization that uses surplus revenues to further a purpose rather than distributing profits to members or owners */
   }
 
-  item def GovernmentOrganization specializes FormalOrganization {
+  part def GovernmentOrganization specializes FormalOrganization {
     doc/* organization that is part of or controlled by a government and exercises public authority */
     attribute administeredBy: Jurisdiction[0..1];
   }
 
-  item def InternationalOrganization specializes FormalOrganization {
+  part def InternationalOrganization specializes FormalOrganization {
     doc/* organization with activities or members in multiple countries */
   }
 
   // =========================================================
-  // Registration and identification
+  // Registration and identification (value-like)
   // =========================================================
 
   item def RegistrationIdentifier specializes Organizations::OrganizationIdentifier {
@@ -152,7 +152,7 @@ package FormalOrganizations {
   }
 
   // =========================================================
-  // Structural relationships (refinements)
+  // Structural relationships (containers, still items)
   // =========================================================
 
   item def CorporateGroup {
@@ -161,12 +161,12 @@ package FormalOrganizations {
     attribute member: FormalOrganization[1..*];
   }
 
-  item def HoldingCompany specializes FormalOrganization {
+  part def HoldingCompany specializes FormalOrganization {
     doc/* company that owns enough voting stock in one or more other companies to control their policies and management */
     attribute holds: FormalOrganization[0..*];
   }
 
-  item def Subsidiary specializes FormalOrganization {
+  part def Subsidiary specializes FormalOrganization {
     doc/* company controlled by another company, typically referred to as the parent or holding company */
     attribute parent: FormalOrganization[0..1];
   }
