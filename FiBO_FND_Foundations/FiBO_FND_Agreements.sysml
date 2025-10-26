@@ -101,11 +101,11 @@ package Contracts {
   private import Time::*;           // Date, DateTime
   private import Agreements::*;   // to resolve Agreement if not already
   private import People::*;       // reuse IdentityDocument types
+  private import Parties::*;     // Party
+  private import LegalCore::*;     // Law
+  private import Jurisdiction::*; // Jurisdiction
 
   // ---- Minimal stubs for external references (swap to real FND/Common packages later) ----
-  item def Party { }
-  item def Law { }
-  item def Jurisdiction { }
   item def Duration { }
   item def ExplicitDate { }
   item def DateTimeStamp { }
@@ -115,7 +115,7 @@ package Contracts {
 
   // ===== Core contract model =====
 
-  item def Contract specializes Agreements::Agreement {
+  item def Contract specializes Agreement {
     doc/* legally binding agreement between parties that defines rights, obligations, and benefits */
     // Parties and roles
     attribute contractParty: ContractParty[0..*];     // hasContractParty
@@ -123,7 +123,6 @@ package Contracts {
     attribute principalParty: ContractPrincipal[0..1];// hasPrincipalParty
     attribute thirdParty: ContractThirdParty[0..*];   // hasThirdParty
     // Temporal & governance
-    attribute effectiveDate: Date[0..1];              // hasEffectiveDate
     attribute effectiveDateTimeStamp: DateTime[0..1]; // hasEffectiveDateTimeStamp
     attribute executionDate: Date[0..1];              // hasExecutionDate
     attribute executionDateTimeStamp: DateTime[0..1]; // hasExecutionDateTimeStamp

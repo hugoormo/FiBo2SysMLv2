@@ -1,7 +1,6 @@
 // ===================================================================
 // FIBO_FND_OwnershipAndControl.sysml
 // CI Aggregator (public re-export of subpackages)
-// Paste this whole file as-is.
 // ===================================================================
 package FIBO_FND_OwnershipAndControl {
   public import Ownership::*;

@@ -1,7 +1,6 @@
 // ===================================================================
 // FIBO_FND_Law_and_AgreementsContracts.sysml
 // Single merged CI for Law (with subpackages) + patched Agreements & Contracts
-// Paste this whole file as-is.
 // ===================================================================
 
 // -------------------------------------------------------------------
@@ -343,30 +342,17 @@ package LegalCore {
 // ======================
 // Agreements.sysml  (patched wiring)
 // ======================
-package Agreements {
+package LegalAgreements {
 
   private import ScalarValues::*;   // String, Boolean
   private import Time::*;           // Date
   private import LegalCore::*;      // Law, GoverningLaw, ChoiceOfLawClause
   private import Jurisdiction::*;   // Jurisdiction
+  private import Agreements::*;   // base Agreement
+  private import Parties::*;        // Party
 
   // Minimal stubs used here; swap to real Parties package later
-  item def Party { }
   item def Thing { }
-
-  item def Agreement {
-    doc/* negotiated understanding between two or more parties reflecting offer and acceptance of commitments */
-    attribute party: Party[2..*];
-    attribute beneficiary: Beneficiary[0..*];
-    attribute commitment: Commitment[1..*];
-    attribute effectiveDate: Date[0..1];
-    attribute expirationDate: Date[0..1];
-    attribute governingLaw: LegalCore::Law[0..1];
-    attribute governingJurisdiction: Jurisdiction[0..1];
-    attribute contractualElement: Contracts::ContractualElement[0..*];
-    attribute milestoneProvision: Contracts::ContractMilestone[0..*];
-    attribute nonBindingTerm: Contracts::NonBindingTerm[0..*];
-  }
 
   item def BilateralAgreement specializes Agreement {
     doc/* agreement where two parties commit to perform specific actions or obligations towards each other */
@@ -426,7 +412,7 @@ package Agreements {
 // ======================
 // Contracts.sysml  (patched wiring)
 // ======================
-package Contracts {
+package LegalContracts {
 
   private import ScalarValues::*;     // String, Boolean
   private import Time::*;             // Date, DateTime
@@ -434,13 +420,14 @@ package Contracts {
   private import LegalCore::*;        // Law, GoverningLaw, ChoiceOfLawClause
   private import Jurisdiction::*;     // Jurisdiction
   private import FinancialDates::*;   // Duration, ExplicitDate
+  private import Contracts::*;        // base Contract
 
   // Minimal generic stubs (keep Thing local here)
   item def Thing { }
 
   // ===== Core contract model =====
 
-  item def Contract specializes Agreements::Agreement {
+  item def LegalContract specializes Agreements::Agreement {
     doc/* legally binding agreement between parties that defines rights, obligations, and benefits */
     // Parties and roles
     attribute contractParty: ContractParty[0..*];
@@ -449,15 +436,12 @@ package Contracts {
     attribute thirdParty: ContractThirdParty[0..*];
 
     // Temporal & governance
-    attribute effectiveDate: Date[0..1];
     attribute effectiveDateTimeStamp: DateTime[0..1];
     attribute executionDate: Date[0..1];
     attribute executionDateTimeStamp: DateTime[0..1];
     attribute earlyTerminationDate: ExplicitDate[0..1];
     attribute contractDuration: Duration[0..1];
     attribute term: Duration[0..1];
-    attribute governingLaw: LegalCore::Law[0..1];
-    attribute governingJurisdiction: Jurisdiction[0..1];
 
     // Documentation & semantics
     attribute contractDocument: ContractDocument[0..*];

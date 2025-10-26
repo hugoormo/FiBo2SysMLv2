@@ -205,10 +205,10 @@ package FinancialDates {
 }
 
 // ======================
-// Occurrences.sysml
+// FiOccurrences.sysml
 // (feature-based from Occurrences.rdf)
 // ======================
-package Occurrences {
+package FiOccurrences {
 
   private import ScalarValues::*;   // String, Integer, Boolean
   private import Time::*;           // Date, DateTime
@@ -217,20 +217,20 @@ package Occurrences {
   private import FinancialDates::*; // reuse CombinedDateTime where helpful
   item def CombinedDateTime { }
 
-  item def OccurrenceKind {
+  item def FiOccurrenceKind {
     doc/* classifier that specifies the general nature of an occurrence (event) */
-    attribute occurrenceKind: Occurrence[0..*];   // hasOccurrence
+    attribute occurrenceKind: FiOccurrence[0..*];   // hasOccurrence
   }
 
-  item def Occurrence {
+  item def FiOccurrence {
     doc/* realized event, e.g., something that happens at a point in time or over an interval */
     attribute eventDate: Date[0..1];                // hasEventDate
     attribute eventDateValue: CombinedDateTime[0..1]; // hasEventDateValue
   }
 
-  item def OccurrenceBasedDate specializes FinancialDates::CalculatedDate {
+  item def FiOccurrenceBasedDate specializes FinancialDates::CalculatedDate {
     doc/* calculated date that is defined with respect to the occurrence of some occurrence kind */
-    attribute isTriggeredBy: OccurrenceKind[1..*]; // isTriggeredBy
+    attribute isTriggeredBy: FiOccurrenceKind[1..*]; // isTriggeredBy
   }
 
   item def Calculation {
@@ -239,7 +239,7 @@ package Occurrences {
     attribute output: ScalarValues::String[0..*];  // hasOutput
   }
 
-  item def CalculationEvent specializes OccurrenceKind {
+  item def CalculationEvent specializes FiOccurrenceKind {
     doc/* kind of event that is either scheduled or triggered, often associated with a calculated financial event, that causes a calculation to be performed */
   }
 }

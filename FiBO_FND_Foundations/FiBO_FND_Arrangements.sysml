@@ -265,12 +265,10 @@ package Ratings {
   private import ScalarValues::*;     // String
   private import Time::*;             // Date, DateTime
   private import Assessments::*;
+  private import Parties::*;
 
   // External stubs
-  item def PartyRole { }
-  item def Party { }
   item def RatingScale { }
-  item def RatingScalePublisher { }
   item def Thing { }
 
   item def RatingParty specializes PartyRole {

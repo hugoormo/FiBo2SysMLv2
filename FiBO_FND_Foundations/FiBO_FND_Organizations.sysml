@@ -146,7 +146,6 @@ package FormalOrganizations {
 
   item def RegistrationIdentifier specializes Organizations::OrganizationIdentifier {
     doc/* identifier assigned to an organization by a registration authority or scheme */
-    attribute identifierValue: String[0..1];
     attribute registrationAuthority: String[0..1];
     attribute registrationScheme: OrganizationRegistrationScheme[0..1];
   }

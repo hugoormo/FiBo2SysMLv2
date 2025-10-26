@@ -1,7 +1,6 @@
 // ===================================================================
 // FIBO_FND_Utilities.sysml
 // CI Aggregator (public re-export of Utilities subpackages)
-// Paste this whole file as-is.
 // ===================================================================
 package FIBO_FND_Utilities {
   public import Analytics::*;

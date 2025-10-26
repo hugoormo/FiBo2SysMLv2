@@ -1,7 +1,6 @@
 // ===================================================================
 // FIBO_FND_Places.sysml
 // CI Aggregator (public re-export of Places subpackages)
-// Paste this whole file as-is.
 // ===================================================================
 package FIBO_FND_Places {
   public import Addresses::*;

@@ -1,7 +1,6 @@
 // ===================================================================
 // FIBO_FND_TransactionsExt.sysml
 // CI Aggregator (public re-export of extended transaction packages)
-// Paste this whole file as-is.
 // ===================================================================
 package FIBO_FND_TransactionsExt {
   public import MarketTransactions::*;
