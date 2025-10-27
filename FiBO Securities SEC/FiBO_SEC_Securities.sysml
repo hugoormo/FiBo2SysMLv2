@@ -170,12 +170,6 @@ package FIBO_SEC_Securities {
         }
     }
 
-    package MetadataSECSecurities {
-        private import Core::*;
-        item def SECSecuritiesOntologyMetadata specializes OntologyMetadata;
-        item def SECSecuritiesModuleRef;
-    }
-
     package ParametricSchedules {
         private import Core::*;
         item def PaymentSchedule specializes ParametricSchedule {}

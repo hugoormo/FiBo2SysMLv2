@@ -7,15 +7,17 @@
 // CI Aggregator (Law) — public re-export of Law subpackages
 // -------------------------------------------------------------------
 package FIBO_FND_Law {
-  public import Jurisdiction::*;
-  public import LegalCapacity::*;
-  public import LegalCore::*;
+  public import JurisdictionPackage::*;
+  public import LegalCapacityPackage::*;
+  public import LegalCorePackage::*;
+  public import LegalAgreementsPackage::*;
+  public import LegalContractsPackage::*;
 }
 
 // ======================
 // Jurisdiction.sysml
 // ======================
-package Jurisdiction {
+package JurisdictionPackage {
 
   private import ScalarValues::*;   // String, Integer, Boolean
   private import Time::*;           // Date
@@ -84,7 +86,7 @@ package Jurisdiction {
 // ======================
 // LegalCapacity.sysml
 // ======================
-package LegalCapacity {
+package LegalCapacityPackage {
 
   private import ScalarValues::*;   // String, Boolean
   private import Time::*;           // Date
@@ -152,7 +154,7 @@ package LegalCapacity {
 // ======================
 // LegalCore.sysml  (extended)
 // ======================
-package LegalCore {
+package LegalCorePackage {
 
   private import ScalarValues::*;   // String, Boolean
   private import Time::*;           // Date, DateTime
@@ -342,7 +344,7 @@ package LegalCore {
 // ======================
 // Agreements.sysml  (patched wiring)
 // ======================
-package LegalAgreements {
+package LegalAgreementsPackage {
 
   private import ScalarValues::*;   // String, Boolean
   private import Time::*;           // Date
@@ -412,7 +414,7 @@ package LegalAgreements {
 // ======================
 // Contracts.sysml  (patched wiring)
 // ======================
-package LegalContracts {
+package LegalContractsPackage {
 
   private import ScalarValues::*;     // String, Boolean
   private import Time::*;             // Date, DateTime

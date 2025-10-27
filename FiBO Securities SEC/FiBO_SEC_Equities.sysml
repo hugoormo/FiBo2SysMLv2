@@ -200,18 +200,4 @@ package FIBO_SEC_Equities {
             attribute terms : String[0..1];
         }
     }
-
-    // =====================================================
-    // Submodule 5/5 — MetadataSECEquities
-    // =====================================================
-    package MetadataSECEquities {
-
-        part def SECEquitiesModuleMetadata {
-            attribute title : String = "FIBO SEC Equities Module";
-            attribute description : String = "Concepts common to equities: shares, shareholder rights, and depository receipts.";
-            attribute license : String = "MIT";
-            attribute lastUpdated : Date[0..1];
-            attribute contributors : String[*];
-        }
-    }
 }
