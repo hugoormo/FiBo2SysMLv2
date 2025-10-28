@@ -7,7 +7,7 @@ package FIBO_FND_Places {
   public import Facilities::*;
   public import Locations::*;
   public import VirtualPlaces::*;
-  public import RealProperty::*;
+  public import RealPropertyPackage::*;
 }
 
 // ======================
@@ -216,7 +216,7 @@ package VirtualPlaces {
 // ======================
 // RealProperty.sysml
 // ======================
-package RealProperty {
+package RealPropertyPackage {
 
   private import ScalarValues::*;        
   private import Time::*;                
@@ -225,8 +225,8 @@ package RealProperty {
   private import Parties::*;  
   private import Organizations::*; 
   private import FormalOrganizations::*;
-  private import Jurisdiction::*; 
-  private import LegalCore::*;                   
+  private import JurisdictionPackage::*; 
+  private import LegalCorePackage::*;                   
 
   enum def TenureKind {
     doc/* classification of the legal or customary basis by which land or property is held */

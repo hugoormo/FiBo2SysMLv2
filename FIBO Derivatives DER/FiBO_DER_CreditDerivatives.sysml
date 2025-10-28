@@ -22,8 +22,8 @@ package CreditDefaultSwaps {
   private import FinancialDates::*;           // ExplicitDate, Duration, ExplicitDatePeriod, RegularSchedule
   private import PaymentsAndSchedules::*;     // PaymentTerm, PaymentSchedule
   private import CashFlows::*;                // CashFlow (settlement realization)
-  private import LegalCore::*;                // Law (governing law)
-  private import Jurisdiction::*;             // Jurisdiction
+  private import LegalCorePackage::*;                // Law (governing law)
+  private import JurisdictionPackage::*;             // Jurisdiction
 
   // =========================================================
   // Enums & code lists
@@ -215,6 +215,6 @@ package CreditDefaultSwaps {
     attribute fixedRecoveryPct: Real[1..1];
     attribute effectiveDate: FinancialDates::ExplicitDate[0..1];
     attribute expiryDate: FinancialDates::ExplicitDate[0..1];
-    attribute governingLaw: LegalCore::Law[0..1];
+    attribute governingLaw: LegalCorePackage::Law[0..1];
   }
 }

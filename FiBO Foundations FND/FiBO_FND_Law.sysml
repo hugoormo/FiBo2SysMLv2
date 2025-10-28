@@ -36,7 +36,7 @@ package JurisdictionPackage {
     attribute territory: Place[0..*];
     attribute competentCourt: Court[0..*];
     attribute governingBody: GovernmentalOrganization[0..*];
-    attribute legalSystem: LegalCore::LegalSystem[0..1];
+    attribute legalSystem: LegalCorePackage::LegalSystem[0..1];
   }
 
   item def SubjectMatterJurisdiction specializes Jurisdiction {
@@ -90,7 +90,7 @@ package LegalCapacityPackage {
 
   private import ScalarValues::*;   // String, Boolean
   private import Time::*;           // Date
-  private import Jurisdiction::*;   // reuse Jurisdiction types
+  private import JurisdictionPackage::*;   // reuse Jurisdiction types
 
   // --- Minimal stubs (wire later) ---
   item def Person { }
@@ -158,7 +158,7 @@ package LegalCorePackage {
 
   private import ScalarValues::*;   // String, Boolean
   private import Time::*;           // Date, DateTime
-  private import Jurisdiction::*;   // Court, Jurisdiction
+  private import JurisdictionPackage::*;   // Court, Jurisdiction
   private import Documents::*;    // Document, Text
 
   // --- Enums ---
@@ -348,8 +348,8 @@ package LegalAgreementsPackage {
 
   private import ScalarValues::*;   // String, Boolean
   private import Time::*;           // Date
-  private import LegalCore::*;      // Law, GoverningLaw, ChoiceOfLawClause
-  private import Jurisdiction::*;   // Jurisdiction
+  private import LegalCorePackage::*;      // Law, GoverningLaw, ChoiceOfLawClause
+  private import JurisdictionPackage::*;   // Jurisdiction
   private import Agreements::*;   // base Agreement
   private import Parties::*;        // Party
 
@@ -419,8 +419,8 @@ package LegalContractsPackage {
   private import ScalarValues::*;     // String, Boolean
   private import Time::*;             // Date, DateTime
   private import Agreements::*;       // Contract specializes Agreement
-  private import LegalCore::*;        // Law, GoverningLaw, ChoiceOfLawClause
-  private import Jurisdiction::*;     // Jurisdiction
+  private import LegalCorePackage::*;        // Law, GoverningLaw, ChoiceOfLawClause
+  private import JurisdictionPackage::*;     // Jurisdiction
   private import FinancialDates::*;   // Duration, ExplicitDate
   private import Contracts::*;        // base Contract
 

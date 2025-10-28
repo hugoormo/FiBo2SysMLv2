@@ -23,8 +23,8 @@ package SecurityBasedDerivatives {
   private import DerivativesBasics::*;        // ExerciseStyle, SettlementMethod, PayoffFunction
   private import Contracts::*;                // Contract, ContractualElement
   private import Agreements::*;               // Agreement
-  private import LegalCore::*;                // Law
-  private import Jurisdiction::*;             // Jurisdiction
+  private import LegalCorePackage::*;                // Law
+  private import JurisdictionPackage::*;             // Jurisdiction
 
   // =========================================================
   // Core definitions

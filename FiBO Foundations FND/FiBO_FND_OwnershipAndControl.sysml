@@ -124,8 +124,8 @@ package Control {
   private import ScalarValues::*;        // String, Boolean, Real
   private import Time::*;                // Date
   private import Organizations::*;       // FormalOrganization (if CI loaded)
-  private import Jurisdiction::*;        // Jurisdiction (from Law CI)
-  private import LegalCore::*;           // Law (from Law CI)
+  private import JurisdictionPackage::*;        // Jurisdiction (from Law CI)
+  private import LegalCorePackage::*;           // Law (from Law CI)
   private import Organizations::*;     // Organization, FormalOrganization (if CI loaded)
   private import FormalOrganizations::*; // FormalOrganization (if CI loaded)
   private import Parties::*;         // Party (if CI loaded)
@@ -150,7 +150,7 @@ package Control {
     attribute controller: Controller[1..1];
     attribute controlled: ControlledEntity[1..1];
     attribute mechanism: ControlMechanism[0..*];
-    attribute legalBasis: LegalCore::Law[0..*];
+    attribute legalBasis: LegalCorePackage::Law[0..*];
     attribute inJurisdiction: Jurisdiction[0..1];
     attribute effectiveDate: Date[0..1];
     attribute endDate: Date[0..1];
@@ -203,7 +203,7 @@ package Control {
     doc/* minimum measure (e.g., percentage) used to presume control under a given legal framework */
     attribute thresholdPercent: Real[0..1];
     attribute inJurisdiction: Jurisdiction[0..1];
-    attribute basisLaw: LegalCore::Law[0..1];
+    attribute basisLaw: LegalCorePackage::Law[0..1];
   }
 }
 
@@ -219,8 +219,8 @@ package OwnershipAndControl {
   private import Organizations::*;         // Organizations CI (for FormalOrganization)
   private import Ownership::*;             // Ownership types
   private import Control::*;               // Control relationships
-  private import Jurisdiction::*;          // Jurisdiction
-  private import LegalCore::*;             // Law
+  private import JurisdictionPackage::*;          // Jurisdiction
+  private import LegalCorePackage::*;             // Law
   public import FIBO_FND_Organizations::*;     // Organization, FormalOrganization (if CI loaded)
 
   // ---- Minimal stubs (only if CIs not loaded) ----

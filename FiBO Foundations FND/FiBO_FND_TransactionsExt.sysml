@@ -91,12 +91,12 @@ package REATransactions {
   private import ScalarValues::*;          
   private import Time::*;                  
   private import CurrencyAmount::*;        
-  private import RealProperty::*;          
+  private import RealPropertyPackage::*;          
   private import Parties::*;               
   private import Agreements::*;            
   private import Contracts::*;             
-  private import LegalCore::*;             
-  private import Jurisdiction::*;          
+  private import LegalCorePackage::*;             
+  private import JurisdictionPackage::*;          
 
   // ===== Real estate transaction concepts (all items) =====
 
@@ -111,7 +111,7 @@ package REATransactions {
     attribute effectiveDate: Date[0..1];
     attribute closingDate: Date[0..1];
     attribute contract: Contracts::Contract[0..1];
-    attribute governingLaw: LegalCore::Law[0..1];
+    attribute governingLaw: LegalCorePackage::Law[0..1];
     attribute inJurisdiction: Jurisdiction[0..1];
   }
 
@@ -163,8 +163,8 @@ package SecuritiesTransactions {
   private import Contracts::*;             
   private import Parties::*;               
   private import FinancialDates::*;        
-  private import LegalCore::*;             
-  private import Jurisdiction::*;          
+  private import LegalCorePackage::*;             
+  private import JurisdictionPackage::*;          
 
   // ===== Securities transaction model (all items) =====
 
@@ -180,7 +180,7 @@ package SecuritiesTransactions {
     attribute pricePerUnit: CurrencyAmount::MonetaryPrice[0..1];
     attribute totalConsideration: CurrencyAmount::MonetaryAmount[0..1];
     attribute settlementCashFlow: CashFlows::CashFlow[0..1];
-    attribute governingLaw: LegalCore::Law[0..1];
+    attribute governingLaw: LegalCorePackage::Law[0..1];
     attribute inJurisdiction: Jurisdiction[0..1];
   }
 

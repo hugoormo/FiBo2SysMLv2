@@ -24,8 +24,9 @@ package FinancialContextAndProcess {
   private import ProductsAndServices::*;       // Product / Service (process outputs)
   private import Documents::*;                 // Document / Text (procedures, SOPs)
   private import FinancialDates::*;            // ExplicitDate, Duration, Schedules
-  private import TransactionsExt::*;           // Market/Securities/REA transactions (references)
-  private import Utilities::*;                 // Analytics/Annotation (optional linkage)
+  private import MarketTransactions::*;        // Market/Securities/REA transactions (references)
+  private import Analytics::*;                 // Analytics/Annotation (optional linkage)
+  private import AnnotationVocabulary::*;      // Tag / Annotation (optional linkage)
 
   // ---- Minimal generic stand-ins (only if some CI unused yet) ----
   item def Document { }                        // remove when Documents CI is wired
@@ -226,9 +227,9 @@ package FinancialContextAndProcess {
 
   item def TradeLifecycleProcess specializes BusinessProcess {
     doc/* front-to-back process for trade capture, enrichment, confirmation, allocation, settlement, and reporting */
-    attribute relatedTransaction: TransactionsExt::MarketTransactions::MarketTransaction[0..*];
+    attribute relatedTransaction: MarketTransactions::MarketTransaction[0..*];
     attribute confirmationDocument: Document[0..*];
-    attribute settlementInstruction: TransactionsExt::MarketTransactions::SettlementInstruction[0..*];
+    attribute settlementInstruction: MarketTransactions::SettlementInstruction[0..*];
   }
 
   item def CorporateActionsProcessing specializes BusinessProcess {

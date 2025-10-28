@@ -69,7 +69,7 @@ package FormalOrganizations {
   private import ScalarValues::*;       // String, Boolean
   private import Time::*;               // Date
   private import Organizations::*;      // base Organization, names/ids
-  private import Jurisdiction::*;       // Jurisdiction (from Law CI)
+  private import JurisdictionPackage::*;       // Jurisdiction (from Law CI)
 
   // ---- Minimal stubs (wire later as we add more FND packages) ----
   item def Address { }                  // FND Places/Addresses
@@ -94,7 +94,7 @@ package FormalOrganizations {
     attribute incorporationDate: Date[0..1];
     attribute isIncorporated: Boolean[0..1];
     attribute legalForm: String[0..1];
-    attribute inJurisdiction: Jurisdiction[0..1];
+    attribute inJurisdiction: JurisdictionPackage::Jurisdiction[0..1];
   }
 
   part def RegisteredOrganization specializes FormalOrganization {
@@ -133,7 +133,7 @@ package FormalOrganizations {
 
   part def GovernmentOrganization specializes FormalOrganization {
     doc/* organization that is part of or controlled by a government and exercises public authority */
-    attribute administeredBy: Jurisdiction[0..1];
+    attribute administeredBy: JurisdictionPackage::Jurisdiction[0..1];
   }
 
   part def InternationalOrganization specializes FormalOrganization {

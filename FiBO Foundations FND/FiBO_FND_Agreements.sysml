@@ -102,8 +102,8 @@ package Contracts {
   private import Agreements::*;   // to resolve Agreement if not already
   private import People::*;       // reuse IdentityDocument types
   private import Parties::*;     // Party
-  private import LegalCore::*;     // Law
-  private import Jurisdiction::*; // Jurisdiction
+  private import LegalCorePackage::*;     // Law
+  private import JurisdictionPackage::*; // Jurisdiction
 
   // ---- Minimal stubs for external references (swap to real FND/Common packages later) ----
   item def Duration { }

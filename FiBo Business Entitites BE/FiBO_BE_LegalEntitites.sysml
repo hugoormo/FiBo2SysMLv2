@@ -26,7 +26,6 @@ package FIBO_BE_LegalEntities {
     part def LegalEntity specializes LegalPerson {
         attribute legalForm : String[0..1];
         attribute dateOfEstablishment : ExplicitDate[0..1];
-        attribute principalPlaceOfBusiness : Jurisdiction[0..*];
     }
 
     part def CorporateBody specializes LegalEntity;

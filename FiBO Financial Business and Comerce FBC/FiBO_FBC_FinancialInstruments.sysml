@@ -24,7 +24,7 @@ package FinancialInstruments {
   private import Organizations::*;             // Organization / FormalOrganization
   private import Parties::*;                   // Party (issuer contacts, lead managers)
   private import Debt::*;                      // Debt::DebtInstrument (cross-link)
-  private import DerivativesContracts::*;      // optional link to derivative contracts
+  private import DerivativesBasics::*;      // optional link to derivative contracts
   private import SecuritiesTransactions::*;    // for trading/settlement references
 
   // ---- Enums / code lists ----
@@ -97,8 +97,8 @@ package FinancialInstruments {
 
   item def DerivativeInstrumentRef specializes FinancialInstrument {
     doc/* link wrapper when a financial instrument is a derivative contract */
-    attribute contract: DerivativesContracts::DerivativesBasics::DerivativeContract[0..1];
-    attribute swapContract: DerivativesContracts::Swaps::SwapContract[0..1];
+    attribute contract: DerivativesBasics::DerivativeContract[0..1];
+    attribute swapContract: Swaps::SwapContract[0..1];
   }
 
   // ---- Events and relationships ----
@@ -131,7 +131,6 @@ package InstrumentPricing {
   private import CurrencyAmount::*;
   private import FinancialDates::*;
   private import FinancialInstruments::*;
-  private import Utilities::*;                 // for metrics/annotations if needed
 
   // ---- Enums ----
   enum def QuoteType { enum Bid; enum Ask; enum Mid; enum Close; enum Open; enum Last; enum Indicative; enum NAV; }

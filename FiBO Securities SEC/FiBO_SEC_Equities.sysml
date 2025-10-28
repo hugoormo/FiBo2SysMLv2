@@ -13,7 +13,6 @@ package FIBO_SEC_Equities {
     private import ScalarValues::*;           // String, Boolean, Integer, Real
     private import Time::*;                   // Date
     private import MarketsAndListings::*;     // if present in your repo
-    private import SecuritiesCommons::*;      // optional shared securities patterns
     private import FIBO_FND_Organizations::*;
 
     // =====================================================
