@@ -1,126 +1,139 @@
 # Securities (FIBO_SEC)
-## Overview
-The FIBO_SEC (Securities) package family models securities instruments and market structures. It integrates multiple subdomains of the EDM Council FIBO Securities ontologies, including Debt, Equities, Funds, and the newly added FIBO_SEC_Securities group — which defines the general framework for securities identification, classification, issuance, listings, and restrictions.
 
-Within this hierarchy:
-* FIBO_SEC_Debt defines the full range of debt instruments — from bonds and loans to structured and synthetic products.
-* FIBO_SEC_Equities defines ownership instruments (common and preferred shares) and equity-specific rights, listings, and dividend features.
-* FIBO_SEC_Funds defines investment fund structures, share classes, NAV valuation mechanisms, and fund hierarchies.
-* FIBO_SEC_Securities establishes the foundational abstraction of a Security and its associated features (identification, restriction, classification, etc.), reused by all other SEC packages.
+## Overview
+The **FIBO_SEC (Securities)** domain defines the structural, contractual, and classification aspects of financial securities — including **debt**, **equity**, **funds**, and **pooled instruments**.  
+It serves as the central linkage between **Financial Instruments (FBC)** and **Market Data (MD)** domains, modeling how securities are **identified, issued, classified, listed, and restricted** across jurisdictions.
+
+This repository provides the **SysML v2 implementation** of the FIBO Securities domain as a family of **Configuration Items (CIs)**.  
+Each CI captures a specific aspect of securities modeling, applying consistent SysMLv2 feature-based principles and leveraging common FIBO foundational elements.
+
+---
+
+## Scope & Objectives
+* Provide a unified **data architecture for all types of securities**, both exchange-traded and privately placed.  
+* Define **identification, classification, issuance, and listing structures** applicable to all financial instruments.  
+* Represent **jurisdictional restrictions** and **regulatory regimes** governing securities offers and transfers.  
+* Integrate seamlessly with **FIBO_FBC (Financial Instruments, Debt & Equities)** and **FIBO_IND (Market Data, Benchmarks)**.  
+* Support downstream modeling of **corporate actions**, **securitization**, **funds**, and **derivatives**.
+
+---
 
 ## Package Structure
 FIBO_SEC  
 │  
-├── FIBO_SEC_All  
-│   └─ Aggregator importing all SEC modules  
+├─ FIBO_SEC_Debt # fixed-income and structured debt instruments  
+│ ├─ DebtInstruments # core debt security abstractions and option terms  
+│ ├─ Bonds # sovereign, corporate, and subordinated bonds  
+│ ├─ TradedShortTermDebt # commercial paper, CDs, and short-term notes  
+│ ├─ AssetBackedSecurities # consumer and equipment-backed securities  
+│ ├─ MortgageBackedSecurities # agency and private-label MBS structures  
+│ ├─ PoolBackedSecurities # pools, tranches, waterfalls, and credit enhancement  
+│ ├─ CollateralizedDebtObligations # CLOs, CBOs, and cash CDOs  
+│ ├─ SyntheticCDOs # CDS-based synthetic structured products  
+│ ├─ DistributedLoans # syndicated and participations  
+│ └─ ExerciseConventions # day count, reset, and yield conventions  
 │  
-├── FIBO_SEC_Debt  
-│ ├─ AssetBackedSecurities  
-│ ├─ Bonds  
-│ ├─ CollateralizedDebtObligations  
-│ ├─ DebtInstruments  
-│ ├─ DistributedLoans  
-│ ├─ ExerciseConventions  
-│ ├─ MortgageBackedSecurities  
-│ ├─ PoolBackedSecurities  
-│ ├─ SyntheticCDOs  
-│ ├─ TradedShortTermDebt  
-│ └─ MetadataSECDebt  
+├─ FIBO_SEC_Equities # ownership-based instruments and depositary receipts  
+│ ├─ EquityInstruments # common, preferred, warrants, and actions  
+│ ├─ DepositaryReceipts # ADRs, GDRs, and sponsored/unsponsored programs  
+│ ├─ EquityCFIClassificationIndividuals # ISO 10962 classification examples  
+│ └─ EquitiesExampleIndividuals # illustrative instrument examples  
 │  
-├── FIBO_SEC_Equities  
-│ ├─ CommonEquities  
-│ ├─ PreferredEquities  
-│ ├─ EquityInstruments  
-│ ├─ ShareIssuance  
-│ ├─ EquityListings  
-│ ├─ VotingRights  
-│ └─ MetadataSECEquities  
+├─ FIBO_SEC_Funds # collective investment vehicle securities  
+│ ├─ CollectiveInvestmentVehicles # legal, operational, and governance structures  
+│ └─ Funds # fund shares, units, dealing, and distributions  
 │  
-├── FIBO_SEC_Funds  
-│ ├─ CollectiveInvestmentVehicles  
-│ ├─ FundUnits  
-│ ├─ NAVCalculation  
-│ ├─ FundHoldings  
-│ ├─ FundIssuance  
-│ ├─ FundListings  
-│ └─ MetadataSECFunds  
-│  
-└── FIBO_SEC_Securities  
-├─ Baskets  
-├─ MetadataSECSecurities  
-├─ ParametricSchedules  
-├─ Pools  
-├─ SecuritiesClassification  
-├─ SecuritiesIdentification  
-├─ SecuritiesIdentificationIndividuals  
-├─ SecuritiesIssuance  
-├─ SecuritiesListings  
-├─ SecuritiesRestrictions  
-└─ SecurityAssets  
+└─ FIBO_SEC_Securities # generic security abstractions and metadata  
+├─ SecuritiesCore # base security definition and lifecycle status  
+├─ SecuritiesIdentification # identifiers (ISIN, CUSIP, FIGI, ticker)  
+├─ SecuritiesIdentificationIndividuals # example identification instances  
+├─ SecuritiesClassification # asset classes, CFI codes, and exposures  
+├─ SecuritiesIssuance # offerings, tranches, and documentation  
+├─ SecuritiesListings # exchange listings and statuses  
+├─ SecuritiesRestrictions # global restriction framework  
+├─ SecurityAssets # underlying, collateral, and pool links  
+├─ Pools # collateral and loan pools  
+├─ Baskets # baskets and weighted compositions  
+├─ ParametricSchedules # step-up, call, and parametric schedules  
+├─ EUSecuritiesRestrictions # EU Prospectus, MiFID, SFDR-specific rules  
+└─ USSecuritiesRestrictions # U.S. Reg D, Reg S, Rule 144, 144A, and others  
 
-## Imports and Dependencies
-Each subpackage inherits the shared core of DebtSecurity and the common numeric constraints:
-```sysml
-private import ScalarValues::*;
-private import Time::*;
-private import FIBO_FND_Constraints;
-private import FIBO_BE;
-private import FIBO_BE_LegalEntities;
-private import FIBO_SEC;
-private import FIBO_SEC_Debt;
-private import FIBO_SEC_Equities;
-private import FIBO_SEC_Funds;
-```
-## Highlights by Subpackage
-### FIBO_SEC_Debt
-* AssetBackedSecurities — Tranches, SPVs, AssetPools, WaterfallRules.
-* Bonds — Government, Corporate, Callable, Convertible, Secured/Unsecured forms.
-* CollateralizedDebtObligations — CDO/CLO/CBO, managers, tests, and buckets.
-* DebtInstruments — Loans, Notes, floating/fixed rate instruments, payment schedules.
-* DistributedLoans — Syndicated loans, facilities, lenders, commitments, allocations.
-* ExerciseConventions — Option exercise styles, windows, notice periods.
-* MortgageBackedSecurities — MBS pool analytics, factors, prepayment assumptions.
-* PoolBackedSecurities — Generic pool-backed deals, certificates, tranches.
-* SyntheticCDOs — CDS-based CDOs, reference portfolios, tranche terms.
-* TradedShortTermDebt — Commercial Paper, Bankers’ Acceptances, T-Bills, CP programs.
-* MetadataSECDebt — Module metadata for the Debt domain (extends OntologyMetadata).
-### FIBO_SEC_Equities
-* CommonEquities — Definitions for common stock, ownership rights, and dividends.
-* PreferredEquities — Preferred share classes, dividends, and liquidation preferences.
-* EquityInstruments — Core abstractions and relationships for shares and equity securities.
-* ShareIssuance — Equity issuance events, rights offerings, and capital increases.
-* EquityListings — Exchange listings, ticker identifiers, and trading venues.
-* VotingRights — Governance structures and voting mechanisms.
-* MetadataSECEquities — Metadata for the Equities domain.
+---
 
-### FIBO_SEC_Funds
-* CollectiveInvestmentVehicles — Fund structures (mutual funds, ETFs, SICAVs, etc.).
-* FundUnits — Fund share classes, units, and holder rights.
-* NAVCalculation — Net Asset Value determination and valuation frequency.
-* FundHoldings — Underlying assets and composition disclosure.
-* FundIssuance — Primary issuance and redemption processes.
-* FundListings — Exchange-traded fund listings and market structures.
-* MetadataSECFunds — Metadata for the Funds domain.
+## Dependencies
+**Upstream (imports):**
+- `FIBO_FND_*` — foundational ontologies for Law, Parties, Organizations, Dates, and CurrencyAmount  
+- `FIBO_FBC_*` — Financial Business and Commerce (Debt, Equities, FinancialInstruments, Markets)  
+- `FIBO_IND_*` — Indices & Indicators (benchmarks, rates, and indicators)  
+- `FIBO_FND_Utilities` — Analytics and AnnotationVocabulary (for documentation and datasets)  
+- `ScalarValues::*`, `Time::*` — SysML standard libraries
 
-### FIBO_SEC_Securities
-* Core — foundational abstractions: Security, Issuer, SecurityIdentification, SecurityClassification, SecurityRestriction, SecurityAsset, etc.
-* Baskets — definitions of basket securities and constituent weighting.
-* ParametricSchedules — reusable timing conventions (payment, observation, reset schedules).
-* Pools — pooled assets and structured interests.
-* SecuritiesClassification — high-level classification and ISO 10962 (CFI) mapping.
-* SecuritiesIdentification — ISIN, CUSIP, FIGI, Ticker identifiers and their connections.
-* SecuritiesIssuance — issuance process, offering types, and offering documentation.
-* SecuritiesListings — listing venues (exchanges, MTFs/OTFs) and listing connections.
-* SecuritiesRestrictions — holding and transfer constraints.
-* SecurityAssets — asset structures backing securities (indexes, baskets, and pools).
-* MetadataSECSecurities — metadata module for the Securities domain.
+**Internal CI cross-links:**
+- `SecuritiesCore` ↔ `Debt`, `Equities`, `Funds` (common abstraction)  
+- `SecuritiesIdentification` ↔ `Classification` ↔ `Issuance` (instrument metadata flow)  
+- `Listings` ↔ `Restrictions` (venue- and jurisdiction-specific distribution rules)  
+- `EU/US Restrictions` ↔ `Restrictions` (regional extensions)  
+- `SecurityAssets` ↔ `Pools` ↔ `Baskets` (structural and collateral linkage)
 
-## Modeling Notes
-* DebtSecurity is the shared superclass across all subpackages.
-* Cross-package references use qualified names (e.g., AssetBackedSecurities::Tranche).
-* Common constraints reference FIBO_FND_Constraints (e.g., PercentBetween0And100).
-* Connections define cross multiplicities, ordering, and directionality explicitly.
-* Each subpackage is self-contained but interoperable via imports.
+**Downstream (consumers):**
+- `FIBO_CAE_*` (Corporate Actions and Events)  
+- `FIBO_MD_*` (Market Data and temporal analytics)  
+- `FIBO_BP_*` (Business Processes — issuance, reporting, and servicing)
+
+---
+
+## Design Principles
+* **Feature-based modeling:** all relationships are expressed as SysML features (attributes) rather than associations.  
+* **Processor vs. processed:**  
+  - *Parts* represent active entities (issuers, agents, venues).  
+  - *Items* represent processed entities (securities, offerings, listings).  
+* **Inheritance without duplication:** shared attributes are defined once in `SecuritiesCore` and specialized in downstream packages.  
+* **Jurisdictional modularity:** separate EU and U.S. restriction packages allow regulatory frameworks to evolve independently.  
+* **Standards alignment:**  
+  - ISO 10962 (CFI) for classification  
+  - ISO 6166 (ISIN) and 10383 (MIC) for identification and venues  
+  - SEC, ESMA, MiFID II, and Prospectus Regulation for restrictions  
+* **Interoperability:** designed to integrate with Debt, Equities, Funds, and Derivatives models across FIBO.
+
+---
+
+## Coding Conventions
+* **Packages:** `FIBO_SEC_<Subpackage>` (PascalCase)  
+* **Elements:**  
+  - `part def` — processors (issuers, custodians, depositaries, agents)  
+  - `item def` — processed securities, instruments, and records  
+* **Features:** lowerCamelCase  
+* **Enumerations:** `enum def <Name>` with PascalCase literals  
+* **Documentation:** `doc/* … */` aligned with EDM Council FIBO and regulatory standards  
+* **Imports:** explicit `private` or `public` statements only — no implicit dependencies  
+
+---
+
+## Versioning & Configuration Policy
+* Each subpackage is a self-contained **Configuration Item (CI)** under the FIBO_SEC domain.  
+* Updates follow the **FIBO SysMLv2 Configuration Management Plan**.  
+* Regional regulation packages (e.g., EU/US Restrictions) are versioned independently.  
+* CI interoperability is maintained through shared public imports from foundational domains.
+
+---
 
 ## Purpose
-The FIBO_SEC family provides a comprehensive SysML v2 representation of financial securities, consistent with the EDM Council FIBO SEC ontologies. The new FIBO_SEC_Securities CI defines the canonical, reusable core for securities across all instrument classes — enabling traceable, model-based integration between Debt, Equities, Funds, and future extensions.
+The **FIBO Securities (SEC)** domain provides the foundation for all **tradable financial instruments** within the FIBO ontology.  
+It standardizes the representation of security metadata — identity, classification, issuance, restrictions, and structure — enabling consistent integration across:
+
+- Capital market instruments (Debt, Equity, Funds)  
+- Structured and pooled assets (ABS, MBS, CDOs)  
+- Listing and restriction regimes (EU and U.S.)  
+- Corporate actions, valuation, and regulatory reporting frameworks  
+
+This SysMLv2 implementation supports **data lineage, regulatory traceability, and semantic interoperability** across the financial system.
+
+---
+
+### References
+* [EDMC FIBO Securities Specification](https://spec.edmcouncil.org/fibo/)  
+* [ISO 6166 (ISIN)](https://www.iso.org/standard/81537.html)  
+* [ISO 10962 (CFI)](https://www.iso.org/standard/74838.html)  
+* [MiFID II, Prospectus Regulation, SFDR, and UCITS Directives](https://finance.ec.europa.eu/)  
+* [U.S. SEC Securities Act of 1933, Exchange Act of 1934, and Rule 144/144A](https://www.sec.gov/)  
+* [SysML v2 Specification](https://www.omg.org/spec/SysML/2.0/)

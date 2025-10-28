@@ -1,202 +1,223 @@
-// =========================================================
-// Configuration Item: FIBO_SEC_Equities
-// SysML v2 model mapping of FIBO SEC/Equities RDF group
-// Baseline imports follow project conventions
-// =========================================================
+// ===================================================================
+// FIBO_SEC_Equities.sysml
+// CI Aggregator (public re-export of SEC Equities subpackages)
+// Paste this whole file as-is.
+// ===================================================================
 package FIBO_SEC_Equities {
+  public import EquityInstruments::*;
+  public import DepositaryReceipts::*;
+  public import EquityCFIClassificationIndividuals::*;
+}
 
-    // -----------------------------------------------------
-    // Imports (private by default)
-    // -----------------------------------------------------
-    private import FIBO_BE_Corporations::*;   // baseline approved CI
-    private import FIBO_FND_Constraints::*;   // NonNegativeInteger, Between0And1, NonNegativeReal, etc.
-    private import ScalarValues::*;           // String, Boolean, Integer, Real
-    private import Time::*;                   // Date
-    private import MarketsAndListings::*;     // if present in your repo
-    private import FIBO_FND_Organizations::*;
+// ===========================
+// EquityInstruments.sysml
+// ===========================
+package EquityInstruments {
 
-    // =====================================================
-    // Submodule 1/5 — DepositaryReceipts
-    // =====================================================
-    package DepositaryReceipts {
+  // ---- Imports (private) ----
+  private import ScalarValues::*;            // String, Integer, Real, Boolean
+  private import Time::*;                    // Date, DateTime
+  private import CurrencyAmount::*;          // MonetaryAmount, Currency
+  private import Organizations::*;           // Organization
+  private import FormalOrganizations::*;     // FormalOrganization
+  private import Parties::*;                 // Party
+  private import Markets::*;                 // TradingVenue, Listing
+  private import FinancialDates::*;          // ExplicitDatePeriod, RegularSchedule
 
-        // Import sibling package for EquitySecurity definition
-        private import EquityInstruments::*;
+  // ---- Core equity abstractions ----
 
-        part def DepositaryReceipt {
-            attribute id : String;
-            attribute form : SecurityForm[0..1];
-            ref issuer : DepositaryBank;
-            ref underlyingSecurity : EquitySecurity;
-            attribute programName : String[0..1];
-        }
+  item def EquityInstrument {
+    doc/* security that represents an ownership interest in an issuing entity and entitles holders to residual claims on assets and earnings */
+    attribute instrumentId: String[0..*];             // ISIN/CUSIP/local code
+    attribute ticker: String[0..1];
+    attribute issuer: FormalOrganization[0..1];
+    attribute currency: Currency[0..1];
+    attribute parValue: MonetaryAmount[0..1];
+    attribute authorizedShares: Integer[0..1];
+    attribute issuedShares: Integer[0..1];
+    attribute outstandingShares: Integer[0..1];
+    attribute votingRightsText: String[0..1];         // summary (1 share = 1 vote, multiple class, etc.)
+    attribute dividendPolicyText: String[0..1];
+    attribute listingVenue: Markets::TradingVenue[0..*];
+    attribute primaryListing: Markets::TradingVenue[0..1];
+    attribute issueDate: Date[0..1];
+  }
 
-        part def DepositaryBank {
-            attribute legalName : String;
-        }
+  item def CommonShare specializes EquityInstrument {
+    doc/* equity security that represents residual ownership in the issuing entity and typically conveys voting rights */
+  }
 
-        part def AmericanDepositaryReceipt specializes DepositaryReceipt {
-            attribute level : ADRLevel[0..1];
-            attribute usMarketAccess : Boolean[0..1];
-        }
+  item def PreferredShare specializes EquityInstrument {
+    doc/* equity security with priority over common shares regarding dividends and liquidation and may have limited or no voting rights */
+    attribute dividendRatePct: Real[0..1];
+    attribute isCumulative: Boolean[0..1];
+    attribute isParticipating: Boolean[0..1];
+    attribute isConvertible: Boolean[0..1];
+    attribute conversionTermsText: String[0..1];
+    attribute redemptionTermsText: String[0..1];
+  }
 
-        part def EuropeanDepositaryReceipt specializes DepositaryReceipt {}
-        part def GlobalDepositaryReceipt   specializes DepositaryReceipt {}
+  // ---- Share classes, actions, and entitlements ----
 
-        enum def ADRLevel {
-            enum LevelI;
-            enum LevelII;
-            enum LevelIII;
-            enum Rule144A;
-        }
+  item def ShareClass {
+    doc/* set of rights/terms defining a category of shares issued by the same issuer */
+    attribute className: String[1..1];               // e.g., "Class A"
+    attribute votingRightsText: String[0..1];
+    attribute dividendPreferenceText: String[0..1];
+    attribute convertibilityText: String[0..1];
+    attribute numberIssued: Integer[0..1];
+  }
 
-        enum def SecurityForm {
-            enum Bearer;
-            enum Registered;
-        }
-    }
+  item def EquityAction {
+    doc/* action affecting the terms, number, or distribution of equity instruments (corporate action perspective) */
+    attribute effectiveDate: Date[0..1];
+    attribute recordDate: Date[0..1];
+    attribute paymentDate: Date[0..1];
+    attribute description: String[0..1];
+  }
 
-    // =====================================================
-    // Submodule 2/5 — EquitiesExampleIndividuals
-    // =====================================================
-    package EquitiesExampleIndividuals {
+  item def StockSplit specializes EquityAction {
+    doc/* corporate action that increases the number of shares by dividing existing shares */
+    attribute splitRatioNumerator: Integer[1..1];
+    attribute splitRatioDenominator: Integer[1..1];
+  }
 
-        private import EquityInstruments::*;
-        private import MarketsAndListings::*;
+  item def ReverseStockSplit specializes EquityAction {
+    doc/* corporate action that reduces the number of shares by combining existing shares */
+    attribute reverseRatioNumerator: Integer[1..1];
+    attribute reverseRatioDenominator: Integer[1..1];
+  }
 
-        part def CommonShareExample {
-            attribute fisn : String[0..1];
-            attribute figi : String[0..1];
-            attribute shareClassCode : String[0..1];
-            attribute firstTradeDate : Date[0..1];
-            ref issuer : ShareIssuer;
-            ref primaryListing : ExchangeListing;
-        }
+  item def DividendEvent specializes EquityAction {
+    doc/* distribution of value to shareholders in cash, shares, or other consideration */
+    attribute dividendAmount: MonetaryAmount[0..1];   // for cash dividend
+    attribute dividendCurrency: Currency[0..1];
+    attribute isStockDividend: Boolean[0..1];
+    attribute stockDividendRate: Real[0..1];          // shares per share
+  }
 
-        part def AppleCommonShareExample   specializes CommonShareExample {}
-        part def AlphabetClassAExample     specializes CommonShareExample {}
-        part def AlphabetClassCExample     specializes CommonShareExample {}
-    }
+  item def RightsIssue specializes EquityAction {
+    doc/* offer to existing shareholders to purchase additional shares, usually at a discount, in proportion to existing holdings */
+    attribute subscriptionPrice: MonetaryAmount[0..1];
+    attribute rightsRatioNumerator: Integer[0..1];
+    attribute rightsRatioDenominator: Integer[0..1];
+    attribute tradingPeriod: ExplicitDatePeriod[0..1];
+  }
 
-    // =====================================================
-    // Submodule 3/5 — EquityCFIClassificationIndividuals
-    // =====================================================
-    package EquityCFIClassificationIndividuals {
+  item def Warrant specializes EquityInstrument {
+    doc/* security granting the holder the right to purchase the issuer's equity at a specified price before expiry */
+    attribute exercisePrice: MonetaryAmount[0..1];
+    attribute expirationDate: Date[0..1];
+    attribute exerciseStyleText: String[0..1];        // American, European, etc.
+    attribute ratioUnderlyingPerWarrant: Real[0..1];
+    attribute underlyingIssuer: FormalOrganization[0..1];
+  }
 
-        enum def VotingRights {
-            enum OneShareOneVote;
-            enum Enhanced;
-            enum Restricted;
-            enum None;
-        }
+  // ---- Identifiers / metadata ----
 
-        enum def PaymentForm {
-            enum Cash;
-            enum Reinvestment;
-            enum Scrip;
-            enum InKind;
-        }
+  item def EquityIdentifier {
+    doc/* sequence of characters identifying an equity instrument under a scheme */
+    attribute schemeName: String[1..1];               // e.g., ISIN, CUSIP, SEDOL, TICKER
+    attribute value: String[1..1];
+    attribute assignmentAuthority: Organizations::Organization[0..1];
+  }
 
-        enum def Convertibility {
-            enum NonConvertible;
-            enum Convertible;
-            enum Exchangeable;
-        }
+  item def EquityMetadata {
+    doc/* descriptive metadata and analytics hooks for an equity instrument */
+    attribute instrument: EquityInstrument[1..1];
+    attribute sectorText: String[0..1];
+    attribute industryText: String[0..1];
+    attribute freeFloatShares: Integer[0..1];
+    attribute indexMembershipText: String[0..*];
+    attribute referenceDataset: Analytics::Dataset[0..1];
+  }
+}
 
-        enum def DividendRateType {
-            enum Fixed;
-            enum Adjustable;
-            enum AuctionRate;
-            enum None;
-        }
+// ===========================
+// DepositaryReceipts.sysml
+// ===========================
+package DepositaryReceipts {
 
-        enum def Preference {
-            enum Common;
-            enum Preferred;
-        }
+  // ---- Imports (private) ----
+  private import ScalarValues::*;
+  private import Time::*;
+  private import CurrencyAmount::*;
+  private import EquityInstruments::*;       // EquityInstrument
+  private import FormalOrganizations::*;     // FormalOrganization
+  private import Organizations::*;           // Organization
+  private import Markets::*;                 // TradingVenue
+  private import FinancialDates::*;          // ExplicitDatePeriod
 
-        part def EquityCFIFeatureProfile {
-            attribute cfiCode : String;
-            attribute preference : Preference;
-            attribute votingRights : VotingRights;
-            attribute convertibility : Convertibility;
-            attribute dividendRateType : DividendRateType;
-            attribute paymentForm : PaymentForm[0..1];
-        }
+  enum def DRKind {
+    doc/* classification of depositary receipts by issuance/scope */
+    enum ADR;            // American Depositary Receipt
+    enum GDR;            // Global Depositary Receipt
+    enum EDR;            // European Depositary Receipt
+    enum IDR;            // International Depositary Receipt
+    enum BDR;            // Brazilian Depositary Receipt (example)
+    enum Other;
+  }
 
-        part def CommonNonConvertible_OneVote_FixedCash specializes EquityCFIFeatureProfile {}
-        part def PreferredConvertible_EnhancedVote_Adjustable specializes EquityCFIFeatureProfile {}
-    }
+  enum def ADRLevel {
+    doc/* SEC/NYSE/Nasdaq-recognized ADR program levels */
+    enum LevelI;
+    enum LevelII;
+    enum LevelIII;
+    enum Rule144A;
+  }
 
-    // =====================================================
-    // Submodule 4/5 — EquityInstruments (core)
-    // =====================================================
-    package EquityInstruments {
+  item def DepositaryReceipt specializes EquityInstrument {
+    doc/* negotiable certificate representing shares of a foreign company, held by a depositary bank and traded in another market */
+    attribute kind: DRKind[1..1];
+    attribute depositaryBank: FormalOrganization[0..1];
+    attribute underlyingIssuer: FormalOrganization[0..1];
+    attribute underlyingShare: EquityInstruments::EquityInstrument[0..1];
+    attribute ratioDRToUnderlying: Real[0..1];          // e.g., 1 DR = 2 underlying shares
+    attribute programLevel: ADRLevel[0..1];             // only applicable for ADRs
+    attribute programEffective: ExplicitDatePeriod[0..1];
+  }
 
-        part def ShareIssuer {
-            attribute legalName : String;
-            attribute lei : String[0..1];
-        }
+  item def SponsoredDR specializes DepositaryReceipt {
+    doc/* depositary receipt established with participation of the underlying issuer */
+    attribute sponsor: FormalOrganization[0..1];
+  }
 
-        abstract part def EquitySecurity {
-            attribute securityId : String[0..1];
-        }
+  item def UnsponsoredDR specializes DepositaryReceipt {
+    doc/* depositary receipt established by a depositary bank without a formal agreement with the underlying issuer */
+  }
+}
 
-        part def Share specializes EquitySecurity {
-            attribute shareClass : String[0..1];
-            attribute pricePerShare : Real[0..1];
-            attribute sharesOutstanding : NonNegativeInteger[0..1];
-            ref issuer : ShareIssuer;
-            ref rights : VotingRightsSpec[0..1];
-            ref dividendPolicy : DividendSpec[0..1];
-            ref redemption : EquityRedemptionProvision[0..1];
-        }
+// ===========================================
+// EquityCFIClassificationIndividuals.sysml
+// ===========================================
+package EquityCFIClassificationIndividuals {
 
-        part def CommonShare    specializes Share {}
-        part def PreferredShare specializes Share {}
+  // ---- Imports (private) ----
+  private import ScalarValues::*;
+  private import Time::*;
+  private import EquityInstruments::*;     // instrument specializations
+  private import Organizations::*;         // Organization if needed for notes
 
-        part def VotingRightsSpec {
-            attribute votesPerShare : NonNegativeReal;
-            attribute notes : String[0..1];
-        }
+  item def CFIEquityCode {
+    doc/* ISO 10962 (CFI) equity classification code with description and mapping hints */
+    attribute code: String[1..1];           // e.g., "ESVUFR" (example pattern)
+    attribute shortDescription: String[1..1];
+    attribute notes: String[0..1];
+  }
 
-        abstract part def DividendSpec {
-            attribute declarationDate : Date[0..1];
-            ref distributionMethod : DividendDistributionMethod[0..1];
-            ref schedule : DividendSchedule[0..1];
-        }
+  // Representative CFI “individuals” for common equity types (illustrative)
+  item def CFI_Common_SingleVoting {
+    attribute cfi: CFIEquityCode[1..1];
+    attribute appliesTo: CommonShare[0..*];
+  }
 
-        part def FixedRateDividend specializes DividendSpec {
-            attribute annualRate : Between0And1;
-        }
+  item def CFI_Preferred_Cumulative {
+    attribute cfi: CFIEquityCode[1..1];
+    attribute appliesTo: PreferredShare[0..*];
+  }
 
-        part def AdjustableRateDividend specializes DividendSpec {
-            attribute benchmark : String;
-            attribute formula : String[0..1];
-        }
-
-        part def AuctionRateDividend specializes DividendSpec {
-            attribute resetFrequencyDays : NonNegativeInteger;
-        }
-
-        enum def DividendDistributionMethod {
-            enum Payment;
-            enum Reinvestment;
-        }
-
-        part def DividendSchedule {
-            attribute paymentDates : Date[*];
-        }
-
-        part def EquityPosition {
-            ref instrument : Share;
-            attribute quantity : NonNegativeInteger;
-            attribute asOf : Date;
-        }
-
-        part def EquityRedemptionProvision {
-            attribute isExtendable : Boolean[0..1];
-            attribute terms : String[0..1];
-        }
-    }
+  item def CFI_DR_ADR_LevelII {
+    attribute cfi: CFIEquityCode[1..1];
+    attribute appliesTo: DepositaryReceipts::DepositaryReceipt[0..*];
+  }
 }

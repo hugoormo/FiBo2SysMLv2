@@ -1,287 +1,502 @@
-// =========================================================
-// Configuration Item: FIBO_SEC_Securities
-// SysML v2 model mapping of FIBO SEC/Securities RDF group
-// Conventions: item def (no 'class'), ref (not 'reference'), private import, enum def, ScalarValues, Time
-// =========================================================
-
+// ===================================================================
+// FIBO_SEC_Securities.sysml
+// CI Aggregator (public re-export of SEC Securities subpackages)
+// Paste this whole file as-is.
+// ===================================================================
 package FIBO_SEC_Securities {
+  public import SecuritiesCore::*;
+  public import SecuritiesIdentification::*;
+  public import SecuritiesIdentificationIndividuals::*;
+  public import SecuritiesClassification::*;
+  public import SecuritiesIssuance::*;
+  public import SecuritiesListings::*;
+  public import SecuritiesRestrictions::*;
+  public import SecurityAssets::*;
+  public import Pools::*;
+  public import Baskets::*;
+  public import ParametricSchedules::*;
+}
 
-    // -----------------------------------------------------
-    // Canonical Imports (project baselines)
-    // -----------------------------------------------------
-    private import ScalarValues::*;          // String, Integer, Real, Date, etc.
-    private import Time::*;                  // Time and date utilities
-    private import FIBO_FND_Constraints;     // central constraints (NonNegativeInteger, Between0And1, etc.)
-    private import FIBO_BE_All;                  // Business Entities root
-    private import FIBO_BE_LegalEntities;    // Legal entities (issuers / registrants)
-    private import FIBO_SEC_All;                 // Securities domain root
-    private import FIBO_SEC_Debt;            // Debt (for cross-references)
-    private import FIBO_SEC_Equities;        // Equities (for cross-references)
-    private import FIBO_SEC_Funds;           // Funds (for cross-references)
+// ======================
+// SecuritiesCore.sysml
+// ======================
+package SecuritiesCore {
 
-    // -----------------------------------------------------
-    // Shared Core for this CI
-    // -----------------------------------------------------
-    package Core {
-        // Common abstractions reused by subpackages in this CI
+  // ---- Imports (private) ----
+  private import ScalarValues::*;            // String, Integer, Real, Boolean
+  private import Time::*;                    // Date, DateTime
+  private import CurrencyAmount::*;          // Currency, MonetaryAmount, MonetaryPrice
+  private import FinancialDates::*;          // Duration, ExplicitDate, ExplicitDatePeriod, RegularSchedule
+  private import Organizations::*;           // Organization
+  private import FormalOrganizations::*;     // FormalOrganization
+  private import Markets::*;                 // TradingVenue, Market
 
-        item def Security {
-            attribute name: String;
-            attribute description: String[0..1];
-            attribute issueDate: Date[0..1];
-            attribute terminationDate: Date[0..1];
+  enum def SecurityLifecycleStatus { enum Proposed; enum Active; enum Suspended; enum Matured; enum Redeemed; enum Cancelled; enum Defaulted; enum Delisted; }
 
-            ref issuedBy: Issuer[0..1];
-            ref identifies: SecurityIdentification[0..*];
-            ref listedOn: SecurityListing[0..*];
-            ref governedBy: SecurityRestriction[0..*];
-            ref classifiedBy: SecurityClassification[0..*];
-            ref backedBy: SecurityAsset[0..*];
-        }
+  // ---- Core security abstraction ----
+  item def Security {
+    doc/* fungible financial instrument representing ownership, credit, entitlement, or reference exposure */
+    attribute securityId: String[0..*];                // generic holder (ISIN/CUSIP/etc.) — see Identification pkg
+    attribute title: String[0..1];
+    attribute issuer: FormalOrganization[0..1];
+    attribute currency: Currency[0..1];
+    attribute issueDate: Date[0..1];
+    attribute firstTradeDate: Date[0..1];
+    attribute status: SecurityLifecycleStatus[0..1];
+    attribute nominalAmount: MonetaryAmount[0..1];
+    attribute description: String[0..1];
 
-        item def Issuer specializes FIBO_BE_LegalEntities::LegalEntity {}
+    // Cross-domain hooks
+    attribute classification: SecuritiesClassification::SecurityClassification[0..*];
+    attribute listing: SecuritiesListings::Listing[0..*];
+    attribute restriction: SecuritiesRestrictions::SecurityRestriction[0..*];
+  }
 
-        item def SecurityIdentification {
-            attribute assignedOn: Date[0..1];
-            ref identifies: Security[1];
-            ref hasIdentifier: SecurityIdentifier[1];
-        }
+  // Convenience specializations (non-exhaustive, for typing)
+  item def EquitySecurity   specializes Security { }
+  item def DebtSecurityCore specializes Security { }       // aligns with SEC_Debt::DebtSecurity via import when combined
+  item def FundSecurity     specializes Security { }       // e.g., ETF share / fund unit
+  item def DerivativeSecurity specializes Security { }
+}
 
-        item def SecurityIdentifier {
-            attribute value: String;
-            attribute scheme: IdentifierScheme;
-        }
+// =================================
+// SecuritiesIdentification.sysml
+// =================================
+package SecuritiesIdentification {
 
-        enum def IdentifierScheme {
-            enum ISIN;
-            enum CUSIP;
-            enum SEDOL;
-            enum FIGI;
-            enum LEI;
-            enum TICKER;
-            enum OTHER;
-        }
+  // ---- Imports (private) ----
+  private import ScalarValues::*;
+  private import Time::*;
+  private import SecuritiesCore::*;
+  private import Organizations::*;
+  private import FormalOrganizations::*;
 
-        item def SecurityClassification {
-            ref classifiedSecurity: Security[1];
-            ref class: SecurityClass[1];
-        }
+  // Generic identifier wrapper
+  item def SecurityIdentifier {
+    doc/* identifier value for a security under a named scheme */
+    attribute schemeName: String[1..1];          // ISIN, CUSIP, SEDOL, FIGI, TICKER, WKN, VALOR
+    attribute value: String[1..1];
+    attribute assignmentAuthority: Organizations::Organization[0..1];
+    attribute assignedSecurity: Security[0..1];
+    attribute assignedIssuer: FormalOrganization[0..1];     // for LEI or issuer codes
+    attribute assignedOn: Date[0..1];
+  }
 
-        enum def ClassificationScheme {
-            enum FIBO;
-            enum ISO10962_CFI;
-            enum NAICS;
-            enum GICS;
-            enum CUSTOM;
-        }
+  // Convenience typed aliases (optional specializations)
+  item def ISIN  specializes SecurityIdentifier { }
+  item def CUSIP specializes SecurityIdentifier { }
+  item def SEDOL specializes SecurityIdentifier { }
+  item def FIGI  specializes SecurityIdentifier { }
+  item def TickerIdentifier specializes SecurityIdentifier { }
+  item def LEIIdentifier   specializes SecurityIdentifier { } // issuer LEI when used at issuer level
+}
 
-        item def SecurityClass {
-            attribute name: String;
-            attribute definition: String[0..1];
-        }
+// ===============================================
+// SecuritiesIdentificationIndividuals.sysml
+// ===============================================
+package SecuritiesIdentificationIndividuals {
 
-        item def SecurityListing {
-            attribute listingDate: Date[0..1];
-            attribute delistingDate: Date[0..1];
-            attribute listingVenueCode: String[0..1];
-            ref security: Security[1];
-            ref venue: ListingVenue[1];
-            ref localIdentifier: SecurityIdentifier[0..1];
-        }
+  // ---- Imports (private) ----
+  private import ScalarValues::*;
+  private import Time::*;
+  private import SecuritiesIdentification::*;
+  private import SecuritiesCore::*;
+  private import FormalOrganizations::*;
 
-        item def ListingVenue {
-            attribute name: String;
-            attribute mic: String[0..1];
-            attribute country: String[0..1];
-        }
+  // Example individuals (illustrative placeholders)
+  item def ExampleIssuer specializes FormalOrganization { }
 
-        abstract item def SecurityRestriction {
-            attribute effectiveDate: Date[0..1];
-            attribute terminationDate: Date[0..1];
-            attribute text: String[0..1];
-            ref restrictedSecurity: Security[1];
-        }
+  item def ExampleSecurity specializes SecuritiesCore::Security {
+    attribute :>> title: String[0..1] = "Example Security";
+  }
 
-        item def TransferRestriction specializes SecurityRestriction {
-            attribute restrictionType: TransferRestrictionType;
-        }
+  item def ExampleISIN specializes ISIN {
+    attribute :>> schemeName: String[1..1] = "ISIN";
+    attribute :>> value: String[1..1] = "US0000000001";
+    attribute :>> assignedSecurity: SecuritiesCore::Security[0..1];
+  }
 
-        enum def TransferRestrictionType {
-            enum LEGEND;
-            enum LOCKUP;
-            enum RULE144;
-            enum AFFILIATE_LIMITS;
-            enum OTHER;
-        }
+  item def ExampleFIGI specializes FIGI {
+    attribute :>> schemeName: String[1..1] = "FIGI";
+    attribute :>> value: String[1..1] = "BBG000BLNNH6";
+    attribute :>> assignedSecurity: SecuritiesCore::Security[0..1];
+  }
+}
 
-        abstract item def SecurityAsset {
-            attribute description: String[0..1];
-        }
+// =================================
+// SecuritiesClassification.sysml
+// =================================
+package SecuritiesClassification {
 
-        item def CashAsset specializes SecurityAsset {}
-        item def CommodityAsset specializes SecurityAsset { attribute commodityCode: String[0..1]; }
-        item def RealEstateAsset specializes SecurityAsset { attribute address: String[0..1]; }
-        item def LoanAsset specializes SecurityAsset { attribute loanId: String[0..1]; }
-        item def SecurityReferenceAsset specializes SecurityAsset { ref security: Security[1]; }
+  // ---- Imports (private) ----
+  private import ScalarValues::*;
+  private import Time::*;
+  private import SecuritiesCore::*;
 
-        item def ParametricSchedule {
-            attribute startDate: Date;
-            attribute endDate: Date[0..1];
-            attribute frequency: Frequency;
-            attribute businessDayConvention: BusinessDayConvention[0..1];
-            attribute dayCount: DayCountConvention[0..1];
-        }
+  enum def AssetClass { enum Equity; enum Debt; enum Fund; enum Derivative; enum FX; enum Commodity; enum Other; }
+  enum def ExposureKind { enum Ownership; enum Credit; enum Reference; enum Basket; enum Index; enum Commodity; enum Currency; enum Rate; enum Volatility; enum Other; }
 
-        enum def Frequency { enum DAILY; enum WEEKLY; enum MONTHLY; enum QUARTERLY; enum SEMI_ANNUAL; enum ANNUAL; }
-        enum def BusinessDayConvention { enum FOLLOWING; enum MOD_FOLLOWING; enum PRECEDING; enum MOD_PRECEDING; enum NONE; }
-        enum def DayCountConvention { enum ACT_360; enum ACT_365F; enum ACT_ACT; enum THIRTY_360; enum OTHER; }
+  item def CFI {
+    doc/* ISO 10962 CFI code describing category/attributes of a security */
+    attribute code: String[1..1];               // 6-char code
+    attribute shortDescription: String[0..1];
+  }
 
-        item def WeightedConstituent {
-            attribute weight: Real;
-            ref member: WeightedConstituent[1];
-            constraint def Between0And1Weight { 
-                attribute weight : Real = weight;
-                
-                weight >= 0.0 and weight <= 1.0 
-            }
-        }
+  item def SecurityClassification {
+    doc/* classification record for a security */
+    attribute assetClass: AssetClass[0..1];
+    attribute exposureKind: ExposureKind[0..1];
+    attribute cfi: CFI[0..1];
+    attribute notes: String[0..1];
+    attribute forSecurity: SecuritiesCore::Security[0..1];
+  }
+}
 
-        item def WeightsSumToOne {
-            attribute totalWeight: Real;
-            constraint def SumToOne { 
-                attribute totalWeight : Real = totalWeight;
-                totalWeight == 1.0 }
-        }
-    }
+// ===========================
+// SecuritiesIssuance.sysml
+// ===========================
+package SecuritiesIssuance {
 
-    package Baskets {
-        private import Core::*;
+  // ---- Imports (private) ----
+  private import ScalarValues::*;
+  private import Time::*;
+  private import CurrencyAmount::*;
+  private import FinancialDates::*;
+  private import SecuritiesCore::*;
+  private import Organizations::*;
+  private import FormalOrganizations::*;
 
-        item def SecurityBasket specializes Security {
-            ref constituents: WeightedConstituent[1..*];
-            ref weightPolicy: WeightingPolicy[0..1];
-        }
+  enum def OfferingType { enum Public; enum PrivatePlacement; enum Shelf; enum Programmatic; enum Rights; enum Other; }
+  enum def AllotmentMethod { enum ProRata; enum BookBuild; enum Auction; enum FixedPrice; enum Other; }
 
-        enum def WeightingPolicy { enum EQUAL; enum MARKET_CAP; enum PRICE; enum CUSTOM; }
+  item def OfferingDocument {
+    doc/* legal/marketing document for a securities offering (e.g., prospectus, offering memorandum) */
+    attribute title: String[1..1];
+    attribute publicationDate: Date[0..1];
+    attribute issuer: FormalOrganization[0..1];
+    attribute summaryText: String[0..1];
+  }
 
-        item def BasketWeights specializes WeightsSumToOne {
-            ref basket: SecurityBasket[1];
-            ref items: WeightedConstituent[1..*];
-        }
-    }
+  item def SecuritiesOffering {
+    doc/* process/event by which new securities are created and sold */
+    attribute issuer: FormalOrganization[1..1];
+    attribute offeringType: OfferingType[0..1];
+    attribute offeredSecurityTemplate: SecuritiesCore::Security[0..1]; // template/series to be issued
+    attribute currency: Currency[0..1];
+    attribute plannedSize: MonetaryAmount[0..1];
+    attribute issueDate: Date[0..1];
+    attribute bookBuildWindow: ExplicitDatePeriod[0..1];
+    attribute allotmentMethod: AllotmentMethod[0..1];
+    attribute document: OfferingDocument[0..*];
+    attribute underwriter: FormalOrganization[0..*];
+  }
 
-    package ParametricSchedules {
-        private import Core::*;
-        item def PaymentSchedule specializes ParametricSchedule {}
-        item def ObservationSchedule specializes ParametricSchedule {}
-        item def ResetSchedule specializes ParametricSchedule {}
-        item def DateGrid {
-            attribute anchorDate: Date;
-            attribute tenor: String;
-            attribute count: Integer;
-        }
-        enum def RollConvention { enum EOM; enum IMM; enum NONE; }
-    }
+  item def Series {
+    doc/* set of securities issued under common terms */
+    attribute seriesName: String[1..1];
+    attribute baseSecurity: SecuritiesCore::Security[0..1];
+    attribute firstIssueDate: Date[0..1];
+    attribute finalIssueDate: Date[0..1];
+  }
 
-    package Pools {
-        private import Core::*;
-        item def AssetPool {
-            attribute poolId: String[0..1];
-            ref assets: SecurityAsset[1..*];
-        }
-        item def SecurityPool specializes Security {
-            ref pool: AssetPool[1];
-            ref interests: PoolInterest[1..*];
-        }
-        item def PoolInterest specializes Security {
-            attribute trancheLabel: String[0..1];
-            attribute priority: Integer[0..1];
-            ref backedByPool: AssetPool[1];
-        }
-    }
+  item def TrancheRecord {
+    doc/* issuance slice with its own size/price/time */
+    attribute series: Series[0..1];
+    attribute trancheName: String[0..1];
+    attribute issueDate: Date[0..1];
+    attribute size: MonetaryAmount[0..1];
+    attribute price: MonetaryPrice[0..1];
+  }
+}
 
-    package SecuritiesClassification {
-        private import Core::*;
-        item def EquityClass specializes SecurityClass {}
-        item def DebtClass specializes SecurityClass {}
-        item def FundClass specializes SecurityClass {}
-        item def DerivativeClass specializes SecurityClass {}
-        item def OtherSecurityClass specializes SecurityClass {}
-        item def CFIClassification specializes SecurityClassification {
-            attribute cfiCode: String;
-            constraint def CfiCodeFormat { }
-        }
-    }
+// ========================
+// SecuritiesListings.sysml
+// ========================
+package SecuritiesListings {
 
-    package SecuritiesIdentification {
-        private import Core::*;
-        item def ISINIdentifier specializes SecurityIdentifier { attribute countryPrefix: String[0..1]; }
-        item def CUSIPIdentifier specializes SecurityIdentifier {}
-        item def SEDOLIdentifier specializes SecurityIdentifier {}
-        item def FIGIIdentifier specializes SecurityIdentifier {}
-        item def TickerIdentifier specializes SecurityIdentifier { attribute exchangeMic: String[0..1]; }
-        connection def IdentifiesSecurity {
-            end id: SecurityIdentifier[1];
-            end target: Security[1];
-        }
-    }
+  // ---- Imports (private) ----
+  private import ScalarValues::*;
+  private import Time::*;
+  private import SecuritiesCore::*;
+  private import Markets::*;                 // TradingVenue, MIC code in your Markets CI
 
-    package SecuritiesIdentificationIndividuals {
-        private import Core::*;
-        private import SecuritiesIdentification::*;
-        item def Example_ISIN_MSFT specializes ISINIdentifier { 
-            :>> value := "US5949181045"; 
-            :>> scheme := IdentifierScheme::ISIN; 
-        }
-        item def Example_Ticker_MSFT specializes TickerIdentifier { 
-            :>> value := "MSFT"; 
-            :>> scheme := IdentifierScheme::TICKER; 
-        }
-    }
+  enum def ListingStatus { enum Applied; enum Listed; enum Suspended; enum Delisted; enum NotListed; }
+  enum def QuoteCurrencyPolicy { enum SecurityCurrency; enum VenueCurrency; enum Other; }
 
-    package SecuritiesIssuance {
-        private import Core::*;
-        item def Issuance {
-            attribute announcementDate: Date[0..1];
-            attribute pricingDate: Date[0..1];
-            attribute settlementDate: Date[0..1];
-            attribute offeringType: OfferingType[0..1];
-            ref security: Security[1];
-            ref issuer: Issuer[1];
-            ref offeringDocument: OfferingDocument[0..1];
-        }
-        enum def OfferingType { enum IPO; enum SPO; enum PRIVATE_PLACEMENT; enum RIGHTS_OFFERING; enum OTHER; }
-        item def OfferingDocument { attribute url: String[0..1]; attribute title: String[0..1]; }
-    }
+  item def Listing {
+    doc/* the registration and maintenance of a security’s presence on a trading venue */
+    attribute security: SecuritiesCore::Security[1..1];
+    attribute venue: TradingVenue[1..1];
+    attribute ticker: String[0..1];
+    attribute micCode: String[0..1];
+    attribute status: ListingStatus[0..1];
+    attribute listedOn: Date[0..1];
+    attribute delistedOn: Date[0..1];
+    attribute quoteCurrencyPolicy: QuoteCurrencyPolicy[0..1];
+    attribute notes: String[0..1];
+  }
+}
 
-    package SecuritiesListings {
-        private import Core::*;
-        item def Exchange specializes ListingVenue {}
-        item def MtfOtfVenue specializes ListingVenue {}
-        connection def ListedOnVenue {
-            end listing: SecurityListing[1];
-            end venue: ListingVenue[1];
-        }
-    }
+// ============================
+// SecuritiesRestrictions.sysml
+// ============================
+package SecuritiesRestrictions {
 
-    package SecuritiesRestrictions {
-        private import Core::*;
-        item def HoldingRestriction specializes SecurityRestriction { 
-            attribute maxPositionPercent: Real[0..1]; 
-        }
-        item def UseRestriction specializes SecurityRestriction {}
-        constraint def MaxPositionBetween0And1 { 
-            attribute maxPositionPercent : Real = maxPositionPercent;
-            maxPositionPercent >= 0.0 and maxPositionPercent <= 1.0
-        }
-    }
+  // ---- Imports (private) ----
+  private import ScalarValues::*;
+  private import Time::*;
+  private import SecuritiesCore::*;
+  private import JurisdictionPackage::*;    // Jurisdiction (FND Law)
+  private import LegalCorePackage::*;       // Law (FND Law)
+  private import Parties::*;                // Party (for eligible investors)
 
-    package SecurityAssets {
-        private import Core::*;
-        private import Baskets::*;
-        private import Pools::*;
-        item def IndexAsset specializes SecurityAsset { attribute indexCode: String[0..1]; }
-        item def BasketAsset specializes SecurityAsset { ref basket: SecurityBasket[1]; }
-        item def PoolAsset specializes SecurityAsset { ref pool: AssetPool[1]; }
-    }
+  enum def RestrictionKind {
+    enum TransferRestriction;     // e.g., private placement transfer limits
+    enum HoldingRestriction;      // e.g., QIB-only
+    enum Lockup;                  // e.g., 90/180-day lockup
+    enum Legend;                  // restrictive legend requirements
+    enum CountryBlock;            // geo restrictions
+    enum SanctionsBlock;
+    enum Other;
+  }
+
+  item def SecurityRestriction {
+    doc/* constraint on sale, transfer, holding, or offering of a security */
+    attribute appliesTo: SecuritiesCore::Security[1..1];
+    attribute kind: RestrictionKind[1..1];
+    attribute jurisdiction: Jurisdiction[0..*];
+    attribute legalBasis: LegalCorePackage::Law[0..*];
+    attribute eligibleInvestorDescription: String[0..1];    // e.g., QIB, accredited, professional client
+    attribute lockupEndDate: Date[0..1];
+    attribute legendText: String[0..1];
+    attribute notes: String[0..1];
+  }
+}
+
+// ===================
+// SecurityAssets.sysml
+// ===================
+package SecurityAssets {
+
+  // ---- Imports (private) ----
+  private import ScalarValues::*;
+  private import Time::*;
+  private import SecuritiesCore::*;
+  private import Pools::*;
+  private import Baskets::*;
+
+  item def UnderlyingAssetLink {
+    doc/* linkage from a security to an underlying single asset, basket, or index */
+    attribute security: SecuritiesCore::Security[1..1];
+    attribute underlyingSecurity: SecuritiesCore::Security[0..1];
+    attribute underlyingBasket: Baskets::Basket[0..1];
+    attribute underlyingPool: Pools::SecurityPool[0..1];
+    attribute weightPercent: Real[0..1];
+    attribute notes: String[0..1];
+  }
+
+  item def CollateralAssetLink {
+    doc/* identifies collateral posted or pledged in relation to a security */
+    attribute security: SecuritiesCore::Security[1..1];
+    attribute collateralSecurity: SecuritiesCore::Security[0..1];
+    attribute collateralDescription: String[0..1];
+    attribute haircutPercent: Real[0..1];
+  }
+}
+
+// ==============
+// Pools.sysml
+// ==============
+package Pools {
+
+  // ---- Imports (private) ----
+  private import ScalarValues::*;
+  private import Time::*;
+  private import CurrencyAmount::*;
+  private import SecuritiesCore::*;
+
+  item def SecurityPool {
+    doc/* collection of assets that back one or more securities */
+    attribute poolId: String[0..1];
+    attribute member: SecuritiesCore::Security[0..*];
+    attribute currentBalance: MonetaryAmount[0..1];
+    attribute cutOffDate: Date[0..1];
+    attribute notes: String[0..1];
+  }
+}
+
+// ===============
+// Baskets.sysml
+// ===============
+package Baskets {
+
+  // ---- Imports (private) ----
+  private import ScalarValues::*;
+  private import Time::*;
+  private import SecuritiesCore::*;
+
+  item def Basket {
+    doc/* defined set of constituents with associated weights or quantities */
+    attribute basketId: String[0..1];
+    attribute label: String[0..1];
+    attribute creationDate: Date[0..1];
+    attribute notes: String[0..1];
+    attribute constituent: BasketConstituent[0..*];
+  }
+
+  item def BasketConstituent {
+    attribute security: SecuritiesCore::Security[1..1];
+    attribute weightPercent: Real[0..1];
+    attribute quantityUnits: Real[0..1];
+    attribute startDate: Date[0..1];
+    attribute endDate: Date[0..1];
+  }
+}
+
+// ============================
+// ParametricSchedules.sysml
+// ============================
+package ParametricSchedules {
+
+  // ---- Imports (private) ----
+  private import ScalarValues::*;
+  private import Time::*;
+  private import FinancialDates::*;   // RegularSchedule
+
+  item def ParametricSchedule {
+    doc/* schedule defined by a rule or series of dated parameters (e.g., step-up, call dates) */
+    attribute name: String[0..1];
+    attribute ruleText: String[0..1];
+    attribute schedulePoint: SchedulePoint[0..*];
+  }
+
+  item def SchedulePoint {
+    attribute effectiveDate: Date[1..1];
+    attribute valueText: String[0..1];     // human-readable term (e.g., "coupon 5.25%", "call @102")
+  }
+
+  // Specialized patterns
+  item def StepUpSchedule specializes ParametricSchedule { }
+  item def StepDownSchedule specializes ParametricSchedule { }
+  item def CallDateSchedule specializes ParametricSchedule { }
+  item def PutDateSchedule  specializes ParametricSchedule { }
+}
+
+// ==================================================
+// EUSecuritiesRestrictions.sysml  (NEW subpackage)
+// ==================================================
+package EUSecuritiesRestrictions {
+
+  // ---- Imports (private) ----
+  private import ScalarValues::*;                  // String, Integer, Real, Boolean
+  private import Time::*;                          // Date
+  private import SecuritiesRestrictions::*;        // SecurityRestriction base
+  private import SecuritiesCore::*;                // Security
+  private import JurisdictionPackage::*;           // Jurisdiction (FND Law)
+  private import LegalCorePackage::*;              // Law (FND Law)
+  private import Parties::*;                       // Party
+
+  // ---- EU frameworks / code lists ----
+  enum def EURestrictionBasis {
+    doc/* principal EU frameworks that commonly drive sell/hold/offer restrictions */
+    enum ProspectusRegulation;     // (EU) 2017/1129
+    enum MiFIDII_TargetMarket;     // MiFID II product governance (target market)
+    enum PRIIPs_KID;               // Packaged Retail & Insurance-based Investment Products KID
+    enum UCITS_Rules;              // UCITS distribution/eligibility
+    enum AIFMD;                    // Alternative Investment Fund Managers Directive
+    enum MarketAbuse;              // MAR inside info / stabilisation disclosures
+    enum Sanctions;                // EU sanctions regimes
+    enum Other;
+  }
+
+  enum def SFDRCategory {
+    doc/* high-level SFDR product classification */
+    enum Article6;
+    enum Article8;
+    enum Article9;
+    enum NotApplicable;
+  }
+
+  enum def EUSellingRestrictionFlag {
+    enum RetailInvestorQualifiedOnly;   // retail allowed only if KID etc.
+    enum ProfessionalClientsOnly;       // MiFID professional clients
+    enum EligibleCounterpartiesOnly;    // ECPs
+    enum QualifiedInvestorsOnly;        // Prospectus Reg “qualified investors”
+  }
+
+  // ---- EU restriction record ----
+  item def EUSecurityRestriction specializes SecuritiesRestrictions::SecurityRestriction {
+    doc/* EU-specific restriction record capturing regime basis, investor categorisation, and documentation conditions */
+    attribute basis: EURestrictionBasis[1..*];
+    attribute sellingFlags: EUSellingRestrictionFlag[0..*];
+    attribute qualifiedInvestorDefinitionText: String[0..1];
+    attribute kidRequired: Boolean[0..1];
+    attribute kidLanguageNote: String[0..1];
+    attribute sfdrCategory: SFDRCategory[0..1];
+    attribute targetMarketText: String[0..1];
+    attribute negativeTargetMarketText: String[0..1];
+    attribute passportingNote: String[0..1];
+    attribute inJurisdiction: Jurisdiction[0..*];
+    attribute effectiveFrom: Date[0..1];
+    attribute effectiveTo: Date[0..1];
+    attribute sellingLegend: String[0..1];
+  }
+}
+
+// ==================================================
+// USSecuritiesRestrictions.sysml  (NEW subpackage)
+// ==================================================
+package USSecuritiesRestrictions {
+
+  // ---- Imports (private) ----
+  private import ScalarValues::*;                  // String, Integer, Real, Boolean
+  private import Time::*;                          // Date
+  private import SecuritiesRestrictions::*;        // SecurityRestriction base
+  private import SecuritiesCore::*;                // Security
+  private import JurisdictionPackage::*;           // Jurisdiction (FND Law)
+  private import LegalCorePackage::*;              // Law (FND Law)
+  private import Parties::*;                       // Party
+
+  // ---- U.S. frameworks / code lists ----
+  enum def USRestrictionBasis {
+    doc/* principal U.S. offering/resale frameworks used for restrictions */
+    enum SecuritiesAct_Registration;   // Registered under ’33 Act
+    enum RegD_506b;                    // Private placement to accredited investors (no general solicitation)
+    enum RegD_506c;                    // Private placement with general solicitation (verification required)
+    enum RegS;                         // Offshore offers/sales
+    enum Rule144;                      // Resale of restricted/controlled securities (holding periods)
+    enum Rule144A;                     // Resales to QIBs
+    enum RegA_Tier1;
+    enum RegA_Tier2;
+    enum RegCF;                        // Crowdfunding
+    enum Section4a2;                   // Private offering exemption (statutory)
+    enum BlueSky;                      // State-level requirements
+    enum Sanctions;                    // OFAC
+    enum Other;
+  }
+
+  enum def InvestorEligibilityFlag {
+    enum AccreditedInvestorOnly;
+    enum QIBOnly;                        // Qualified Institutional Buyer
+    enum InstitutionalOnly;              // Institutional accounts
+    enum RetailPermitted;                // Registered, or as allowed
+  }
+
+  // ---- U.S. restriction record ----
+  item def USSecurityRestriction specializes SecuritiesRestrictions::SecurityRestriction {
+    doc/* U.S.-specific restriction record capturing basis (’33 Act exemptions/conditions), eligibility, and resale limits */
+    attribute basis: USRestrictionBasis[1..*];
+    attribute investorEligibility: InvestorEligibilityFlag[0..*];
+    attribute holdingPeriodMonths: Integer[0..1];        // e.g., Rule 144 6/12 months
+    attribute legendRequired: Boolean[0..1];
+    attribute cedeEligibleOnly: Boolean[0..1];           // if settlement/process constrained
+    attribute restrictedCUSIP: Boolean[0..1];
+    attribute generalSolicitationAllowed: Boolean[0..1]; // Reg D 506(c)
+    attribute verificationRequired: Boolean[0..1];       // e.g., accredited verification
+    attribute inJurisdiction: Jurisdiction[0..*];        // typically United States + states as needed
+    attribute effectiveFrom: Date[0..1];
+    attribute effectiveTo: Date[0..1];
+    attribute sellingLegend: String[0..1];
+    attribute resaleConditionsText: String[0..1];
+  }
 }
