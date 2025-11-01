@@ -58,7 +58,7 @@ Each CI forms a reusable, validated SysML v2 module with well-defined purpose, s
 FiBo2SysMLv2 demonstrates how **formal ontologies** can be transformed into **usable system libraries** for digital engineering, regulatory modeling, and enterprise data integration.  
 It sets a precedent for **AI-augmented model-based ontology translation**, bridging the gap between **knowledge engineering and systems engineering** in a transparent, verifiable manner.
 
-# And now for the detailed descritpion of the project
+# And now for the detailed description of the project
 
 This repository is an experimental attempt to model part of the [EDM Council FIBO](https://spec.edmcouncil.org/fibo/) ontology into a **SysML v2 data library**.
 
