@@ -1,0 +1,10 @@
+{
+  "name": "FiBO2SysMLv2",
+  "description": "A SysMLv2 representation of the Financial Industry Business Ontology (FiBO) developed by the EDM Council.",
+  "version": "0.0.1",
+  "license" : "MIT",
+  "maintainer" : ["hugo Ormo", "hugo.ormo@icloud.com"],
+  "website" : "https://github.com/hugoormo/FiBo2SysMLv2",
+  "topic" : ["Ontology", "Financial Industry", "EDM Council", "FiBO"],
+  "usage": []
+}

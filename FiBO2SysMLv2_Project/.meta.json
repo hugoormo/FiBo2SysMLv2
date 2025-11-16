@@ -1,0 +1,432 @@
+{
+  "index": {
+    "FIBO_BE_Corporations": "FiBo Business Entitites BE/FiBO_BE_Corporation.sysml",
+    "Corporations": "FiBo Business Entitites BE/FiBO_BE_Corporation.sysml",
+    "FIBO_BE_FunctionalEntities": "FiBo Business Entitites BE/FIBO_BE_FunctionalEntities.sysml",
+    "FunctionalEntities": "FiBo Business Entitites BE/FIBO_BE_FunctionalEntities.sysml",
+    "Publishers": "FiBo Business Entitites BE/FIBO_BE_FunctionalEntities.sysml",
+    "FIBO_BE_GovernmentEntities": "FiBo Business Entitites BE/FiBo_BE_GovernmentEntities.sysml",
+    "GovernmentEntities": "FiBo Business Entitites BE/FiBo_BE_GovernmentEntities.sysml",
+    "FIBO_BE_LegalEntities": "FiBo Business Entitites BE/FiBO_BE_LegalEntities.sysml",
+    "LegalPersons": "FiBo Business Entitites BE/FiBO_BE_LegalEntities.sysml",
+    "LEIEntities": "FiBo Business Entitites BE/FiBO_BE_LegalEntities.sysml",
+    "CorporateBodies": "FiBo Business Entitites BE/FiBO_BE_LegalEntities.sysml",
+    "FormalBusinessOrganizations": "FiBo Business Entitites BE/FiBO_BE_LegalEntities.sysml",
+    "FIBO_BE_OwnershipAndControl": "FiBo Business Entitites BE/FiBO_BE_OwnershipAndControl.sysml",
+    "Executives": "FiBo Business Entitites BE/FiBO_BE_OwnershipAndControl.sysml",
+    "OwnershipParties": "FiBo Business Entitites BE/FiBO_BE_OwnershipAndControl.sysml",
+    "ControlParties": "FiBo Business Entitites BE/FiBO_BE_OwnershipAndControl.sysml",
+    "CorporateOwnership": "FiBo Business Entitites BE/FiBO_BE_OwnershipAndControl.sysml",
+    "CorporateControl": "FiBo Business Entitites BE/FiBO_BE_OwnershipAndControl.sysml",
+    "FIBO_BE_Partnerships": "FiBo Business Entitites BE/FiBO_BE_Partnerships.sysml",
+    "Partnerships": "FiBo Business Entitites BE/FiBO_BE_Partnerships.sysml",
+    "FIBO_BE_PrivateLimitedCompanies": "FiBo Business Entitites BE/FiBO_BE_PrivateLimitedCompanies.sysml",
+    "PrivateLimitedCompanies": "FiBo Business Entitites BE/FiBO_BE_PrivateLimitedCompanies.sysml",
+    "FIBO_BE_SoleProprietors": "FiBo Business Entitites BE/FiBO_BE_SoleProprietorships.sysml",
+    "SoleProprietors": "FiBo Business Entitites BE/FiBO_BE_SoleProprietorships.sysml",
+    "FIBO_BE_Trusts": "FiBo Business Entitites BE/FiBO_BE_Trusts.sysml",
+    "Trusts": "FiBo Business Entitites BE/FiBO_BE_Trusts.sysml",
+    "FIBO_BP_Processes": "FiBO Business Processes BP/FiBO_BP_Process.sysml",
+    "FinancialContextAndProcess": "FiBO Business Processes BP/FiBO_BP_Process.sysml",
+    "FIBO_BP_SecuritiesIssuance": "FiBO Business Processes BP/FiBO_BP_SecuritiesIssuance.sysml",
+    "IssuanceProcess": "FiBO Business Processes BP/FiBO_BP_SecuritiesIssuance.sysml",
+    "IssuanceDocuments": "FiBO Business Processes BP/FiBO_BP_SecuritiesIssuance.sysml",
+    "DebtIssuance": "FiBO Business Processes BP/FiBO_BP_SecuritiesIssuance.sysml",
+    "EquitiesIPOIssuance": "FiBO Business Processes BP/FiBO_BP_SecuritiesIssuance.sysml",
+    "MBSIssuance": "FiBO Business Processes BP/FiBO_BP_SecuritiesIssuance.sysml",
+    "AgencyMBSIssuance": "FiBO Business Processes BP/FiBO_BP_SecuritiesIssuance.sysml",
+    "PrivateLabelMBSIssuance": "FiBO Business Processes BP/FiBO_BP_SecuritiesIssuance.sysml",
+    "MuniIssuance": "FiBO Business Processes BP/FiBO_BP_SecuritiesIssuance.sysml",
+    "FIBO_CAE_CorporateActionsAndEvents": "FiBO Corprate Action and Events CAE/FiBO_CAE_CorporateEvents.sysml",
+    "CorporateActions": "FiBO Corprate Action and Events CAE/FiBO_CAE_CorporateEvents.sysml",
+    "SecurityRelatedCorporateActions": "FiBO Corprate Action and Events CAE/FiBO_CAE_CorporateEvents.sysml",
+    "GLEIF_CorporateActionIndividuals": "FiBO Corprate Action and Events CAE/FiBO_CAE_CorporateEvents.sysml",
+    "ISO15022_CorporateActionIndividuals": "FiBO Corprate Action and Events CAE/FiBO_CAE_CorporateEvents.sysml",
+    "FIBO_DER_CreditDerivatives": "FIBO Derivatives DER/FiBO_DER_CreditDerivatives.sysml",
+    "CreditDefaultSwaps": "FIBO Derivatives DER/FiBO_DER_CreditDerivatives.sysml",
+    "FIBO_DER_DerivativesContracts": "FIBO Derivatives DER/FiBO_DER_DerivativesContracts.sysml",
+    "DerivativesBasics": "FIBO Derivatives DER/FiBO_DER_DerivativesContracts.sysml",
+    "DerivativesMasterAgreements": "FIBO Derivatives DER/FiBO_DER_DerivativesContracts.sysml",
+    "FuturesAndForwards": "FIBO Derivatives DER/FiBO_DER_DerivativesContracts.sysml",
+    "Options": "FIBO Derivatives DER/FiBO_DER_DerivativesContracts.sysml",
+    "ExoticOptions": "FIBO Derivatives DER/FiBO_DER_DerivativesContracts.sysml",
+    "RightsAndWarrants": "FIBO Derivatives DER/FiBO_DER_DerivativesContracts.sysml",
+    "Swaps": "FIBO Derivatives DER/FiBO_DER_DerivativesContracts.sysml",
+    "CommoditiesContracts": "FIBO Derivatives DER/FiBO_DER_DerivativesContracts.sysml",
+    "CurrencyContracts": "FIBO Derivatives DER/FiBO_DER_DerivativesContracts.sysml",
+    "StructuredInstruments": "FIBO Derivatives DER/FiBO_DER_DerivativesContracts.sysml",
+    "SwapsIndividuals": "FIBO Derivatives DER/FiBO_DER_DerivativesContracts.sysml",
+    "FIBO_DER_RateDerivatives": "FIBO Derivatives DER/FiBO_DER_RateDerivatives.sysml",
+    "RateDerivatives": "FIBO Derivatives DER/FiBO_DER_RateDerivatives.sysml",
+    "IRSwaps": "FIBO Derivatives DER/FiBO_DER_RateDerivatives.sysml",
+    "IRSwapExampleIndividuals": "FIBO Derivatives DER/FiBO_DER_RateDerivatives.sysml",
+    "FIBO_DER_SecurityBasedDerivatives": "FIBO Derivatives DER/FiBO_DER_SecurityBasedDerivatives.sysml",
+    "SecurityBasedDerivatives": "FIBO Derivatives DER/FiBO_DER_SecurityBasedDerivatives.sysml",
+    "EquitySwaps": "FIBO Derivatives DER/FiBO_DER_SecurityBasedDerivatives.sysml",
+    "FIBO_FBC_DebtAndEquities": "FiBO Financial Business and Comerce FBC/FiBO_FBC_DebtAndEquities.sysml",
+    "Debt": "FiBO Financial Business and Comerce FBC/FiBO_FBC_DebtAndEquities.sysml",
+    "CreditEvents": "FiBO Financial Business and Comerce FBC/FiBO_FBC_DebtAndEquities.sysml",
+    "CreditRatings": "FiBO Financial Business and Comerce FBC/FiBO_FBC_DebtAndEquities.sysml",
+    "Guaranty": "FiBO Financial Business and Comerce FBC/FiBO_FBC_DebtAndEquities.sysml",
+    "FIBO_FBC_FinancialInstruments": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FinancialInstruments.sysml",
+    "FinancialInstruments": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FinancialInstruments.sysml",
+    "InstrumentPricing": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FinancialInstruments.sysml",
+    "Settlement": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FinancialInstruments.sysml",
+    "FIBO_FBC_FunctionalEntities": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FunctionalEntities.sysml",
+    "FinancialServicesEntities": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FunctionalEntities.sysml",
+    "Markets": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FunctionalEntities.sysml",
+    "MarketsIndividuals": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FunctionalEntities.sysml",
+    "BusinessRegistries": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FunctionalEntities.sysml",
+    "RegistrationAuthorities": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FunctionalEntities.sysml",
+    "InternationalRegistriesAndAuthorities": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FunctionalEntities.sysml",
+    "RegulatoryAgencies": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FunctionalEntities.sysml",
+    "BusinessCenters": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FunctionalEntities.sysml",
+    "BusinessCentersIndividuals": "FiBO Financial Business and Comerce FBC/FiBO_FBC_FunctionalEntities.sysml",
+    "FIBO_FBC_ProductsAndServices": "FiBO Financial Business and Comerce FBC/FiBO_FBC_ProductsAndServices.sysml",
+    "FinancialProductsAndServices": "FiBO Financial Business and Comerce FBC/FiBO_FBC_ProductsAndServices.sysml",
+    "ClientsAndAccounts": "FiBO Financial Business and Comerce FBC/FiBO_FBC_ProductsAndServices.sysml",
+    "FIBO_FND_Accounting": "FiBO Foundations FND/FiBO_FND_Accounting.sysml",
+    "CurrencyAmount": "FiBO Foundations FND/FiBO_FND_Accounting.sysml",
+    "CashFlows": "FiBO Foundations FND/FiBO_FND_Accounting.sysml",
+    "AccountingEquity": "FiBO Foundations FND/FiBO_FND_Accounting.sysml",
+    "FIBO_FND_AgentsAndPeople": "FiBO Foundations FND/FIBO_FND_AgentsAndPeople.sysml",
+    "Agents": "FiBO Foundations FND/FIBO_FND_AgentsAndPeople.sysml",
+    "People": "FiBO Foundations FND/FIBO_FND_AgentsAndPeople.sysml",
+    "FIBO_FND_AgreementsAndContracts": "FiBO Foundations FND/FiBO_FND_Agreements.sysml",
+    "Agreements": "FiBO Foundations FND/FiBO_FND_Agreements.sysml",
+    "Contracts": "FiBO Foundations FND/FiBO_FND_Agreements.sysml",
+    "FIBO_FND_Arrangements": "FiBO Foundations FND/FiBO_FND_Arrangements.sysml",
+    "Arrangements": "FiBO Foundations FND/FiBO_FND_Arrangements.sysml",
+    "Assessments": "FiBO Foundations FND/FiBO_FND_Arrangements.sysml",
+    "ClassificationSchemes": "FiBO Foundations FND/FiBO_FND_Arrangements.sysml",
+    "Documents": "FiBO Foundations FND/FiBO_FND_Arrangements.sysml",
+    "IdentifiersAndIndices": "FiBO Foundations FND/FiBO_FND_Arrangements.sysml",
+    "Lifecycles": "FiBO Foundations FND/FiBO_FND_Arrangements.sysml",
+    "Ratings": "FiBO Foundations FND/FiBO_FND_Arrangements.sysml",
+    "Reporting": "FiBO Foundations FND/FiBO_FND_Arrangements.sysml",
+    "FIBO_FND_Constraints": "FiBO Foundations FND/FiBO_FND_Constraints.sysml",
+    "FIBO_FND_DatesAndTimes": "FiBO Foundations FND/FiBO_FND_DatesAndTimes.sysml",
+    "BusinessDates": "FiBO Foundations FND/FiBO_FND_DatesAndTimes.sysml",
+    "FinancialDates": "FiBO Foundations FND/FiBO_FND_DatesAndTimes.sysml",
+    "FiOccurrences": "FiBO Foundations FND/FiBO_FND_DatesAndTimes.sysml",
+    "FIBO_FND_GoalsAndObjectives": "FiBO Foundations FND/FiBO_FND_GoalsAndObjectives.sysml",
+    "GoalsAndObjectives": "FiBO Foundations FND/FiBO_FND_GoalsAndObjectives.sysml",
+    "FIBO_FND_Law": "FiBO Foundations FND/FiBO_FND_Law.sysml",
+    "JurisdictionPackage": "FiBO Foundations FND/FiBO_FND_Law.sysml",
+    "LegalCapacityPackage": "FiBO Foundations FND/FiBO_FND_Law.sysml",
+    "LegalCorePackage": "FiBO Foundations FND/FiBO_FND_Law.sysml",
+    "LegalAgreementsPackage": "FiBO Foundations FND/FiBO_FND_Law.sysml",
+    "LegalContractsPackage": "FiBO Foundations FND/FiBO_FND_Law.sysml",
+    "FIBO_FND_Organizations": "FiBO Foundations FND/FiBO_FND_Organizations.sysml",
+    "Organizations": "FiBO Foundations FND/FiBO_FND_Organizations.sysml",
+    "FormalOrganizations": "FiBO Foundations FND/FiBO_FND_Organizations.sysml",
+    "FIBO_FND_OwnershipAndControl": "FiBO Foundations FND/FiBO_FND_OwnershipAndControl.sysml",
+    "Ownership": "FiBO Foundations FND/FiBO_FND_OwnershipAndControl.sysml",
+    "Control": "FiBO Foundations FND/FiBO_FND_OwnershipAndControl.sysml",
+    "OwnershipAndControl": "FiBO Foundations FND/FiBO_FND_OwnershipAndControl.sysml",
+    "FIBO_FND_Parties": "FiBO Foundations FND/FiBO_FND_Parties.sysml",
+    "Parties": "FiBO Foundations FND/FiBO_FND_Parties.sysml",
+    "FIBO_FND_Places": "FiBO Foundations FND/FiBO_FND_Places.sysml",
+    "Addresses": "FiBO Foundations FND/FiBO_FND_Places.sysml",
+    "Locations": "FiBO Foundations FND/FiBO_FND_Places.sysml",
+    "Facilities": "FiBO Foundations FND/FiBO_FND_Places.sysml",
+    "VirtualPlaces": "FiBO Foundations FND/FiBO_FND_Places.sysml",
+    "RealPropertyPackage": "FiBO Foundations FND/FiBO_FND_Places.sysml",
+    "FIBO_FND_ProductsAndServices": "FiBO Foundations FND/FiBO_FND_ProductsAndServices.sysml",
+    "ProductsAndServices": "FiBO Foundations FND/FiBO_FND_ProductsAndServices.sysml",
+    "PaymentsAndSchedules": "FiBO Foundations FND/FiBO_FND_ProductsAndServices.sysml",
+    "FIBO_FND_TransactionsExt": "FiBO Foundations FND/FiBO_FND_TransactionsExt.sysml",
+    "MarketTransactions": "FiBO Foundations FND/FiBO_FND_TransactionsExt.sysml",
+    "REATransactions": "FiBO Foundations FND/FiBO_FND_TransactionsExt.sysml",
+    "SecuritiesTransactions": "FiBO Foundations FND/FiBO_FND_TransactionsExt.sysml",
+    "FIBO_FND_Utilities": "FiBO Foundations FND/FiBO_FND_Utilities.sysml",
+    "AnnotationVocabulary": "FiBO Foundations FND/FiBO_FND_Utilities.sysml",
+    "Analytics": "FiBO Foundations FND/FiBO_FND_Utilities.sysml",
+    "FIBO_IND_EconomicIndicators": "FiBO Indices and Indicators IND/FiBO_IND_EconomicIndicators.sysml",
+    "EconomicIndicators": "FiBO Indices and Indicators IND/FiBO_IND_EconomicIndicators.sysml",
+    "FIBO_IND_NorthAmericaEconomicIndicators": "FiBO Indices and Indicators IND/FiBO_IND_EconomicIndicators.sysml",
+    "USEconomicIndicators": "FiBO Indices and Indicators IND/FiBO_IND_EconomicIndicators.sysml",
+    "CAEconomicIndicators": "FiBO Indices and Indicators IND/FiBO_IND_EconomicIndicators.sysml",
+    "FIBO_IND_ForeignExchange": "FiBO Indices and Indicators IND/FiBO_IND_ForeignExchange.sysml",
+    "ForeignExchange": "FiBO Indices and Indicators IND/FiBO_IND_ForeignExchange.sysml",
+    "FIBO_IND_Indicators": "FiBO Indices and Indicators IND/FiBO_IND_Indicators.sysml",
+    "Indicators": "FiBO Indices and Indicators IND/FiBO_IND_Indicators.sysml",
+    "FIBO_IND_InterestRates": "FiBO Indices and Indicators IND/FiBO_IND_InterestRates.sysml",
+    "CommonInterestRates": "FiBO Indices and Indicators IND/FiBO_IND_InterestRates.sysml",
+    "InterestRates": "FiBO Indices and Indicators IND/FiBO_IND_InterestRates.sysml",
+    "FIBO_IND_MarketIndices": "FiBO Indices and Indicators IND/FiBO_IND_MarketIndices.sysml",
+    "BasketIndices": "FiBO Indices and Indicators IND/FiBO_IND_MarketIndices.sysml",
+    "EquityIndexExampleIndividuals": "FiBO Indices and Indicators IND/FiBO_IND_MarketIndices.sysml",
+    "FIBO_LOAN_LoansGeneral": "FiBO Loan LOAN/FiBO_LOAN_LoansGeneral.sysml",
+    "Loans": "FiBO Loan LOAN/FiBO_LOAN_LoansGeneral.sysml",
+    "LoanApplications": "FiBO Loan LOAN/FiBO_LOAN_LoansGeneral.sysml",
+    "LoanEvents": "FiBO Loan LOAN/FiBO_LOAN_LoansGeneral.sysml",
+    "LoansRegulatory": "FiBO Loan LOAN/FiBO_LOAN_LoansGeneral.sysml",
+    "FIBO_LOAN_LoanSpecific": "FiBO Loan LOAN/FiBO_LOAN_LoanSpecific.sysml",
+    "LoanProducts": "FiBO Loan LOAN/FiBO_LOAN_LoanSpecific.sysml",
+    "ConsumerLoans": "FiBO Loan LOAN/FiBO_LOAN_LoanSpecific.sysml",
+    "CardAccounts": "FiBO Loan LOAN/FiBO_LOAN_LoanSpecific.sysml",
+    "CommercialLoans": "FiBO Loan LOAN/FiBO_LOAN_LoanSpecific.sysml",
+    "StudentLoans": "FiBO Loan LOAN/FiBO_LOAN_LoanSpecific.sysml",
+    "GreenLoans": "FiBO Loan LOAN/FiBO_LOAN_LoanSpecific.sysml",
+    "MarineFinance": "FiBO Loan LOAN/FiBO_LOAN_LoanSpecific.sysml",
+    "FIBO_LOAN_RealEstateLoans": "FiBO Loan LOAN/FiBO_LOAN_RealStateLoans.sysml",
+    "Mortgages": "FiBO Loan LOAN/FiBO_LOAN_RealStateLoans.sysml",
+    "MortgageOrigination": "FiBO Loan LOAN/FiBO_LOAN_RealStateLoans.sysml",
+    "HMDACoveredMortgages": "FiBO Loan LOAN/FiBO_LOAN_RealStateLoans.sysml",
+    "ConstructionLoans": "FiBO Loan LOAN/FiBO_LOAN_RealStateLoans.sysml",
+    "FIBO_MD_CIVTemporal": "FiBO Market Data MD/FiBO_MD_CIVTemporal.sysml",
+    "FundsTemporal": "FiBO Market Data MD/FiBO_MD_CIVTemporal.sysml",
+    "FIBO_MD_DebtTemporal": "FiBO Market Data MD/FiBO_MD_DebtTemporal.sysml",
+    "DebtTemporal": "FiBO Market Data MD/FiBO_MD_DebtTemporal.sysml",
+    "FIBO_MD_DerivativesTemporal": "FiBO Market Data MD/FiBO_MD_DerivativesTemporal.sysml",
+    "FuturesTemporal": "FiBO Market Data MD/FiBO_MD_DerivativesTemporal.sysml",
+    "ETOptionsTemporal": "FiBO Market Data MD/FiBO_MD_DerivativesTemporal.sysml",
+    "FIBO_MD_TemporalCore": "FiBO Market Data MD/FiBO_MD_TemporalCore.sysml",
+    "SecurityTradingStatuses": "FiBO Market Data MD/FiBO_MD_TemporalCore.sysml",
+    "SecurityCreditStatuses": "FiBO Market Data MD/FiBO_MD_TemporalCore.sysml",
+    "FIBO_SEC_Debt": "FiBO Securities SEC/FiBO_SEC_Debt.sysml",
+    "DebtInstruments": "FiBO Securities SEC/FiBO_SEC_Debt.sysml",
+    "Bonds": "FiBO Securities SEC/FiBO_SEC_Debt.sysml",
+    "TradedShortTermDebt": "FiBO Securities SEC/FiBO_SEC_Debt.sysml",
+    "AssetBackedSecurities": "FiBO Securities SEC/FiBO_SEC_Debt.sysml",
+    "MortgageBackedSecurities": "FiBO Securities SEC/FiBO_SEC_Debt.sysml",
+    "PoolBackedSecurities": "FiBO Securities SEC/FiBO_SEC_Debt.sysml",
+    "CollateralizedDebtObligations": "FiBO Securities SEC/FiBO_SEC_Debt.sysml",
+    "SyntheticCDOs": "FiBO Securities SEC/FiBO_SEC_Debt.sysml",
+    "DistributedLoans": "FiBO Securities SEC/FiBO_SEC_Debt.sysml",
+    "ExerciseConventions": "FiBO Securities SEC/FiBO_SEC_Debt.sysml",
+    "FIBO_SEC_Equities": "FiBO Securities SEC/FiBO_SEC_Equities.sysml",
+    "EquityInstruments": "FiBO Securities SEC/FiBO_SEC_Equities.sysml",
+    "DepositaryReceipts": "FiBO Securities SEC/FiBO_SEC_Equities.sysml",
+    "EquityCFIClassificationIndividuals": "FiBO Securities SEC/FiBO_SEC_Equities.sysml",
+    "FIBO_SEC_Funds": "FiBO Securities SEC/FiBO_SEC_Funds.sysml",
+    "CollectiveInvestmentVehicles": "FiBO Securities SEC/FiBO_SEC_Funds.sysml",
+    "Funds": "FiBO Securities SEC/FiBO_SEC_Funds.sysml",
+    "FIBO_SEC_Securities": "FiBO Securities SEC/FiBO_SEC_Securities.sysml",
+    "SecuritiesCore": "FiBO Securities SEC/FiBO_SEC_Securities.sysml",
+    "SecuritiesIdentification": "FiBO Securities SEC/FiBO_SEC_Securities.sysml",
+    "SecuritiesIdentificationIndividuals": "FiBO Securities SEC/FiBO_SEC_Securities.sysml",
+    "SecuritiesClassification": "FiBO Securities SEC/FiBO_SEC_Securities.sysml",
+    "SecuritiesIssuance": "FiBO Securities SEC/FiBO_SEC_Securities.sysml",
+    "SecuritiesListings": "FiBO Securities SEC/FiBO_SEC_Securities.sysml",
+    "SecuritiesRestrictions": "FiBO Securities SEC/FiBO_SEC_Securities.sysml",
+    "SecurityAssets": "FiBO Securities SEC/FiBO_SEC_Securities.sysml",
+    "Pools": "FiBO Securities SEC/FiBO_SEC_Securities.sysml",
+    "Baskets": "FiBO Securities SEC/FiBO_SEC_Securities.sysml",
+    "ParametricSchedules": "FiBO Securities SEC/FiBO_SEC_Securities.sysml",
+    "EUSecuritiesRestrictions": "FiBO Securities SEC/FiBO_SEC_Securities.sysml",
+    "USSecuritiesRestrictions": "FiBO Securities SEC/FiBO_SEC_Securities.sysml"
+  },
+  "created": "2025-11-16T10:54:11.591510000Z",
+  "checksum": {
+    "FiBo Business Entitites BE/FiBO_BE_Corporation.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBo Business Entitites BE/FIBO_BE_FunctionalEntities.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBo Business Entitites BE/FiBo_BE_GovernmentEntities.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBo Business Entitites BE/FiBO_BE_LegalEntities.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBo Business Entitites BE/FiBO_BE_OwnershipAndControl.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBo Business Entitites BE/FiBO_BE_Partnerships.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBo Business Entitites BE/FiBO_BE_PrivateLimitedCompanies.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBo Business Entitites BE/FiBO_BE_SoleProprietorships.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBo Business Entitites BE/FiBO_BE_Trusts.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Business Processes BP/FiBO_BP_Process.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Business Processes BP/FiBO_BP_SecuritiesIssuance.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Corprate Action and Events CAE/FiBO_CAE_CorporateEvents.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FIBO Derivatives DER/FiBO_DER_CreditDerivatives.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FIBO Derivatives DER/FiBO_DER_DerivativesContracts.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FIBO Derivatives DER/FiBO_DER_RateDerivatives.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FIBO Derivatives DER/FiBO_DER_SecurityBasedDerivatives.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Financial Business and Comerce FBC/FiBO_FBC_DebtAndEquities.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Financial Business and Comerce FBC/FiBO_FBC_FinancialInstruments.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Financial Business and Comerce FBC/FiBO_FBC_FunctionalEntities.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Financial Business and Comerce FBC/FiBO_FBC_ProductsAndServices.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_Accounting.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FIBO_FND_AgentsAndPeople.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_Agreements.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_Arrangements.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_Constraints.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_DatesAndTimes.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_GoalsAndObjectives.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_Law.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_Organizations.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_OwnershipAndControl.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_Parties.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_Places.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_ProductsAndServices.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_Relations.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_TransactionsExt.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Foundations FND/FiBO_FND_Utilities.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Indices and Indicators IND/FiBO_IND_EconomicIndicators.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Indices and Indicators IND/FiBO_IND_ForeignExchange.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Indices and Indicators IND/FiBO_IND_Indicators.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Indices and Indicators IND/FiBO_IND_InterestRates.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Indices and Indicators IND/FiBO_IND_MarketIndices.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Loan LOAN/FiBO_LOAN_LoansGeneral.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Loan LOAN/FiBO_LOAN_LoanSpecific.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Loan LOAN/FiBO_LOAN_RealStateLoans.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Market Data MD/FiBO_MD_CIVTemporal.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Market Data MD/FiBO_MD_DebtTemporal.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Market Data MD/FiBO_MD_DerivativesTemporal.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Market Data MD/FiBO_MD_TemporalCore.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Securities SEC/FiBO_SEC_Debt.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Securities SEC/FiBO_SEC_Equities.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Securities SEC/FiBO_SEC_Funds.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    },
+    "FiBO Securities SEC/FiBO_SEC_Securities.sysml": {
+      "value": "",
+      "algorithm": "NONE"
+    }
+  }
+}
