@@ -153,7 +153,7 @@ package GovernmentEntities {
     attribute entity: GovernmentEntity[1..1];
     attribute branch: GovernmentBranch[0..1];
     attribute tenureMode: TenureMode[0..1];
-    attribute termLength: Duration[0..1];
+    attribute termLength: DurationValue[0..1];
     attribute maximumTerms: Integer[0..1];
     attribute description: String[0..1];
     attribute establishedBy: LegalCorePackage::Law[0..*];

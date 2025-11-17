@@ -88,7 +88,7 @@ package PrivateLimitedCompanies {
     attribute firm: FormalOrganization[1..1];
     attribute appointmentDate: Date[0..1];
     attribute cessationDate: Date[0..1];
-    attribute requirement: AuditRequirement[0..1];
+    attribute auditorRequirement: AuditRequirement[0..1];
   }
 
   // ---- Members & shares ----
@@ -128,7 +128,7 @@ package PrivateLimitedCompanies {
   item def RegisterOfMembers {
     doc/* statutory register of shareholders */
     attribute company: PrivateLimitedCompany[1..1];
-    attribute entry: MemberRegisterEntry[1..*];
+    attribute registerEntry: MemberRegisterEntry[1..*];
     attribute lastUpdated: Date[0..1];
   }
 
@@ -182,7 +182,7 @@ package PrivateLimitedCompanies {
   item def AnnualReturn {
     doc/* statutory filing summarizing company particulars for a given year */
     attribute company: PrivateLimitedCompany[1..1];
-    attribute periodCovered: Duration[0..1];
+    attribute periodCovered: DurationValue[0..1];
     attribute filingDate: Date[1..1];
     attribute registry: Organizations::Organization[0..1];
     attribute document: Document[0..1];

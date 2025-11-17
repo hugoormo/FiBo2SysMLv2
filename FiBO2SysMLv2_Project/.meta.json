@@ -219,6 +219,7 @@
     "USSecuritiesRestrictions": "FiBO Securities SEC/FiBO_SEC_Securities.sysml"
   },
   "created": "2025-11-16T10:54:11.591510000Z",
+  "metamodel": "https://www.omg.org/spec/SysML/20250201",
   "checksum": {
     "FiBo Business Entitites BE/FiBO_BE_Corporation.sysml": {
       "value": "",

@@ -110,7 +110,7 @@ package Partnerships {
     attribute executionDate: Date[0..1];
     attribute effectiveDate: Date[0..1];
     attribute governingLaw: LegalCorePackage::Law[0..1];
-    attribute term: Duration[0..1];
+    attribute term: DurationValue[0..1];
     attribute profitAllocationMethod: ProfitAllocationMethod[0..1];
     attribute containsWaterfall: DistributionWaterfall[0..1];
     attribute amendment: AgreementAmendment[0..*];
@@ -268,7 +268,7 @@ package Partnerships {
     doc/* annual report/confirmation statement required by the registry */
     attribute partnership: Partnership[1..1];
     attribute filingDate: Date[1..1];
-    attribute periodCovered: Duration[0..1];
+    attribute periodCovered: DurationValue[0..1];
     attribute document: Document[0..1];
     attribute acceptedByRegistry: Boolean[0..1];
   }
