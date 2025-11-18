@@ -24,9 +24,6 @@
       "resource": "urn:kpar:metadata-library"
     },
     {
-      "resource": "urn:kpar:requirements-derivation-library"
-    },
-    {
       "resource": "urn:kpar:requirement-derivation-library"
     },
     {
