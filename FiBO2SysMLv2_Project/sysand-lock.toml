@@ -226,13 +226,15 @@ exports = [
 ]
 usages = [
     { resource = "urn:kpar:metadata-library" },
+    { resource = "urn:kpar:quantities-and-units-library" },
+    { resource = "urn:kpar:requirement-derivation-library" },
     { resource = "urn:kpar:semantic-library" },
     { resource = "urn:kpar:systems-library" },
 ]
 sources = [
     { editable = "." },
 ]
-checksum = "8dcf18149d4373005ef2773298d7d1a49ff1faada1212cd8452bfc6317ae126e"
+checksum = "e7d103d3f9956d3ede28e7f89a0f355750e5cbf1c9004e6b85272441c4739279"
 
 [[project]]
 name = "Kernel Data Type Library"
@@ -341,6 +343,70 @@ sources = [
     { remote_kpar = "https://beta.sysand.org/a6d68069b1a6bc243612ee5126a0532be8fdf819b12e878846829427e5d8742d/2.0.0.kpar", remote_kpar_size = 9735 },
 ]
 checksum = "22a2774f05fab823b4de112815a66b6ed475cc456fec7380cf54fd25c6a281cd"
+
+[[project]]
+name = "SysML Quantities and Units Library"
+version = "2.0.0"
+exports = [
+    "ISQ",
+    "ISQAcoustics",
+    "ISQAtomicNuclear",
+    "ISQBase",
+    "ISQCharacteristicNumbers",
+    "ISQChemistryMolecular",
+    "ISQCondensedMatter",
+    "ISQElectromagnetism",
+    "ISQInformation",
+    "ISQLight",
+    "ISQMechanics",
+    "ISQSpaceTime",
+    "ISQThermodynamics",
+    "MeasurementRefCalculations",
+    "MeasurementReferences",
+    "Quantities",
+    "QuantityCalculations",
+    "SI",
+    "SIPrefixes",
+    "TensorCalculations",
+    "Time",
+    "USCU",
+    "USCustomaryUnits",
+    "VectorCalculations",
+]
+identifiers = [
+    "urn:kpar:quantities-and-units-library",
+]
+usages = [
+    { resource = "urn:kpar:data-type-library", version_constraint = "^1.0.0" },
+    { resource = "urn:kpar:function-library", version_constraint = "^1.0.0" },
+    { resource = "urn:kpar:semantic-library", version_constraint = "^1.0.0" },
+    { resource = "urn:kpar:systems-library", version_constraint = "^2.0.0" },
+]
+sources = [
+    { remote_kpar = "https://beta.sysand.org/223f5a58feeaf17a871a84528b2cc2d4362e3b46e4ee18a0154b1a379011e5d9/2.0.0.kpar", remote_kpar_size = 1014647 },
+]
+checksum = "2d989feb75d1002b026c7fbf78d9d5a720b898a80faee677a6ba0d71c593ea2e"
+
+[[project]]
+name = "SysML Requirement Derivation Library"
+version = "2.0.0"
+exports = [
+    "DerivationConnections",
+    "RequirementDerivation",
+    "RequirementsDerivation",
+]
+identifiers = [
+    "urn:kpar:requirement-derivation-library",
+]
+usages = [
+    { resource = "urn:kpar:function-library", version_constraint = "^1.0.0" },
+    { resource = "urn:kpar:semantic-library", version_constraint = "^1.0.0" },
+    { resource = "urn:kpar:systems-library", version_constraint = "^2.0.0" },
+]
+sources = [
+    { remote_kpar = "https://beta.sysand.org/aa4fd09cc27f5ab3244400074238ea6229364f63cb5f1dadddacb9bb2cf21f8c/2.0.0.kpar", remote_kpar_size = 4992 },
+]
+checksum = "31b066a60f038ae3194e8dec405c1bcfaf50ed8d53a4bea898675d0607715cc6"
 
 [[project]]
 name = "SysML Systems Library"
